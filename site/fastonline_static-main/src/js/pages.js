@@ -1,0 +1,150 @@
+const fs = require("fs");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+// Includes
+const head = fs.readFileSync("src/includes/head.html");
+const sectionHeader = fs.readFileSync("src/includes/section-header.html");
+const breadcrumbs = fs.readFileSync("src/includes/breadcrumbs.html");
+const cardReview = fs.readFileSync("src/includes/card-review.html");
+const cardProdMin = fs.readFileSync("src/includes/card-prod--min.html");
+const cardProd = fs.readFileSync("src/includes/card-prod.html");
+const cardSrv = fs.readFileSync("src/includes/card-srv.html");
+const pagination = fs.readFileSync("src/includes/pagination.html");
+const sectionFooter = fs.readFileSync("src/includes/section-footer.html");
+const temp = fs.readFileSync("src/includes/temp.html");
+
+// Pages
+module.exports = [
+  new HtmlWebpackPlugin({
+    template: "./src/index.html",
+    filename: "index.html",
+    inject: "body",
+    title: "Главная",
+    head,
+    sectionHeader,
+    cardProd,
+    cardSrv,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/catalog.html",
+    filename: "catalog.html",
+    inject: "body",
+    title: "Каталог",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    pagination,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/catalog-category.html",
+    filename: "catalog-category.html",
+    inject: "body",
+    title: "Каталог. Категория товаров / шаблоны",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    cardProdMin,
+    pagination,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/catalog-detail.html",
+    filename: "catalog-detail.html",
+    inject: "body",
+    title: "Карточка товара / шаблон",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    cardReview,
+    pagination,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/services.html",
+    filename: "services.html",
+    inject: "body",
+    title: "Страница услуг",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    cardSrv,
+    pagination,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/services-detail.html",
+    filename: "services-detail.html",
+    inject: "body",
+    title: "Деталка услуги",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    cardSrv,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/reviews.html",
+    filename: "reviews.html",
+    inject: "body",
+    title: "Отзывы ",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    cardReview,
+    pagination,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/faq.html",
+    filename: "faq.html",
+    inject: "body",
+    title: "Вопрос-ответ ",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/contacts.html",
+    filename: "contacts.html",
+    inject: "body",
+    title: "Контакты",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/about-service.html",
+    filename: "about-service.html",
+    inject: "body",
+    title: "О сервисе",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    sectionFooter,
+    temp,
+  }),
+  new HtmlWebpackPlugin({
+    template: "./src/pages/howitwork.html",
+    filename: "howitwork.html",
+    inject: "body",
+    title: "Как пользоваться сервисом",
+    head,
+    sectionHeader,
+    breadcrumbs,
+    sectionFooter,
+    temp,
+  }),
+];

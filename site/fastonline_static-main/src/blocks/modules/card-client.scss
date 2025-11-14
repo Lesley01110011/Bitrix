@@ -1,0 +1,14 @@
+.card-client {
+  display: block;
+  border: 1px solid #D8E3ED;
+  padding: rem(26) rem(24);
+  border-radius: rem(10);
+  height: rem(170);
+  @include r($mobile) {
+    height: rem(130);
+  }
+
+  &__pic {
+    height: 100%;
+  }
+}

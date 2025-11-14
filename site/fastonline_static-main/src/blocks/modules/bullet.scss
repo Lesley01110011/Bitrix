@@ -1,0 +1,14 @@
+.bullet {
+  display: block;
+  visibility: visible;
+  width: rem(15);
+  height: rem(5);
+  border-radius: rem(5);
+  background-color: rgba(138, 83, 255, 0.4);
+  transition: width .3s ease-in-out;
+
+  &--active {
+    width: rem(30);
+    background-color: $color-accent;
+  }
+}

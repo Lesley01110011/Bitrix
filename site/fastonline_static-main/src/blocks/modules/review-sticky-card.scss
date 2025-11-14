@@ -1,0 +1,28 @@
+.review-sticky-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  width: 100%;
+  top: rem(30);
+  padding: rem(30) rem(40);
+  border-radius: rem(20);
+  background-color: #F5F7FB;
+  @include r($laptop-min) {
+    position: static;
+    margin-bottom: rem(20);
+  }
+
+  &__text {
+    font-size: rem(20);
+    margin-bottom: rem(15);
+    text-align: center;
+  }
+  &__button {
+    max-width: 100%;
+    min-width: 0;
+    @include r($mobile) {
+      min-width: 100%;
+    }
+  }
+}

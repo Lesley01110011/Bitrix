@@ -1,0 +1,402 @@
+.card-prod {
+  display: block;
+  position: relative;
+  border: 1px solid #D2D2E0;
+  overflow: hidden;
+  transition: all .3s ease-out;
+
+  @include r($laptop) {
+    height: fit-content;
+  }
+
+  &--big {
+    max-height: rem(635);
+    border-radius: rem(20);
+
+    &:hover,
+    &:focus{
+      @include rmin(1024) {
+        .card-prod__overflow,
+        .card-prod__button-fav {
+          opacity: 1;
+        }
+        .card-prod__title,
+        .card-prod__price,
+        .rating__count {
+          color: #FFFFFF;
+        }
+
+        .card-prod__specific-text {
+          color: $color-second;
+        }
+      }
+    }
+  }
+
+  &--min {
+    height: rem(425);
+    border-radius: rem(10);
+    @include r($laptop) {
+      height: rem(400);
+    }
+    @include r($laptop-min) {
+      height: fit-content;
+    }
+
+    &:hover {
+      box-shadow: 20px 60px 50px 0 rgba(65, 78, 124, 0.15);
+      overflow: visible;
+
+
+      .card-prod__bottom--min {
+        box-shadow: 20px 60px 50px 0 rgba(65, 78, 124, 0.15);
+        @include r($laptop-min) {
+          box-shadow: none;
+        }
+      }
+
+      .card-prod__title--min {
+        color: $color-accent;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__top {
+    padding: rem(60) rem(70) 0;
+    height: rem(440);
+    background-color: $color-grayLight;
+    @include r($laptop) {
+      padding: rem(30) rem(30) 0;
+      height: rem(350);
+    }
+    @include r($tablet) {
+      height: rem(300);
+      padding: 0;
+    }
+    @include r($mobileSmall) {
+      height: rem(185);
+    }
+  }
+
+  &__top--min {
+    padding: 0;
+    height: rem(210);
+  }
+
+  &__top--colored {
+    background-color: $color-accent;
+    @include r($mobile) {
+      background-color: $color-grayLight;
+    }
+  }
+
+  &__picture {
+    border-radius: rem(10) rem(10) 0 0;
+    width: 100%;
+    max-width: rem(550);
+    overflow: hidden;
+    @include r($laptop) {
+      max-width: none;
+      height: 100%;
+    }
+
+    img {
+      object-fit: cover;
+      object-position: top;
+      @include r($mobile) {
+        height: auto;
+      }
+    }
+  }
+
+  &__picture--big {
+    height: rem(380);
+  }
+
+  &__picture--min {
+    height: rem(210);
+
+  }
+
+  &__title {
+    margin-bottom: rem(14);
+    position: relative;
+    z-index: 10;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    @include r($mobile) {
+      line-clamp: 4;
+      -webkit-line-clamp: 4;
+    }
+  }
+
+  &__title--min {
+    font-size: rem(20);
+    text-underline-offset: 3px;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    min-height: rem(78);
+    transition: all .3s ease-in-out;
+    @include r($laptop) {
+      min-height: rem(50);
+    }
+    @include r($tablet) {
+      min-height: fit-content;
+      line-clamp: 2;
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  &__price {
+    font-size: rem(24);
+    font-family: $font-accent;
+    @include r($mobile) {
+      font-size: rem(20);
+    }
+  }
+
+  &__price--min {
+    font-size: rem(20);
+    font-family: $font-accent;
+  }
+
+  &__bottom {
+    position: relative;
+    background-color: #FFFFFF;
+    padding: rem(20) rem(30) rem(30);
+    @include r($mobile) {
+      padding: rem(15) rem(20);
+    }
+  }
+
+  &__bottom--min {
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: rem(315);
+    border-radius: 0 0 rem(10) rem(10);
+    transition: all .3s ease-in-out;
+    @include r($laptop) {
+      height: rem(278);
+    }
+    @include r($laptop-min) {
+   position: relative;
+    }
+  }
+
+  &__bottom-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 20;
+    background-color: #FFFFFF;
+    padding: rem(20) rem(30) rem(30);
+    border-radius: rem(10);
+  }
+
+  &__bottom-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+    transition: all .3s ease-out;
+    @include r($mobile) {
+      position: static;
+    }
+  }
+
+  &__specific {
+    margin-bottom: rem(10);
+    @include r($mobile) {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: rem(10);
+    }
+  }
+
+  &__specific-text {
+    color: #8988A0;
+    font-size: rem(16);
+    @include r($mobile) {
+      font-size: rem(14);
+    }
+  }
+
+  &__specific-text--min {
+    color: #8988A0;
+    font-size: rem(14);
+    margin-top: rem(12);
+  }
+
+  &__info {
+    @include r($tablet) {
+      margin-bottom: rem(20);
+    }
+  }
+
+  &__info-logo {
+    width: rem(39);
+    height: rem(39);
+    padding: 2px;
+    @include r($mobile) {
+      position: absolute;
+      top: rem(20);
+      right: rem(20);
+      width: rem(33);
+      height: rem(33);
+    }
+
+    img, svg {
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: contain;
+    }
+  }
+
+  &__info-logo--min {
+    width: rem(33);
+    height: rem(33);
+  }
+
+  &__overflow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: rgba(34, 34, 34, 0.7);
+    opacity: 0;
+    transition: all .3s ease-out;
+    @include r($tablet) {
+      z-index: -10;
+      pointer-events: none;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__overflow-wrap {
+    @include rmin(1024) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: rem(29);
+      gap: rem(18);
+      height: rem(440);
+    }
+  }
+
+  &__button {
+    width: 100%;
+    max-width: rem(287);
+    font-size: rem(18);
+
+    &:hover {
+      svg {
+        transform: scale(1.3);
+      }
+    }
+
+    svg {
+      width: rem(19);
+      height: rem(19);
+      will-change: transform;
+      transition: all .4s ease-out;
+    }
+  }
+
+  &__button--min {
+    font-size: rem(14);
+    width: 50%;
+    max-width: rem(140);
+    min-width: 0;
+    height: rem(50);
+    @include r($laptop-min) {
+      max-width: none;
+      max-width: none;
+    }
+    @include r($tablet) {
+      width: 100%;
+    }
+  }
+
+  &__button--demo {
+    @include r($tablet) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  &__button-fav {
+    position: absolute;
+    top: rem(50);
+    right: rem(50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    width: rem(50);
+    height: rem(50);
+    border-radius: 50%;
+    background-color: $color-grayLight;
+    opacity: 0;
+    transition: all .3s ease-out;
+    @include r($tablet) {
+      opacity: 1;
+      top: rem(15);
+      right: rem(15);
+      box-shadow: 5px 5px 40px rgba(70, 70, 70, 0.18);
+    }
+
+    &:hover,
+    &.active {
+      background-color: $color-accent;
+      box-shadow: 0 0 20px 4px rgba(26, 36, 65, 0.2);
+      opacity: 1;
+
+      svg {
+        fill: #FFFFFF;
+      }
+    }
+
+    svg {
+      width: rem(20);
+      height: rem(18);
+      fill: #A2A2BF;
+    }
+  }
+
+  &__button-fav--min {
+    top: rem(20);
+    right: rem(20);
+    opacity: 1;
+  }
+
+  &__button-mob {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+    @include r($tablet) {
+      display: flex;
+      visibility: visible;
+      position: static;
+      max-width: none;
+    }
+  }
+
+  &__buttons-wrap {
+    gap: rem(10);
+  }
+}

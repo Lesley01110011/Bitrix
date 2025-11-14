@@ -1,0 +1,25 @@
+.prod-detail-cms {
+  display: flex;
+  align-items: center;
+  gap: rem(10);
+  @include r($laptop) {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  @include r($tablet) {
+    width: 50%;
+  }
+  @include r($mobile) {
+    width: fit-content;
+  }
+
+  &__text {
+    font-size: rem(18);
+    font-weight: 600;
+  }
+
+  &__pic {
+    width: rem(35);
+    height: rem(35);
+  }
+}

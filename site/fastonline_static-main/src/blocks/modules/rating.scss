@@ -1,0 +1,25 @@
+.rating {
+  display: flex;
+  align-items: center;
+  &__stars {
+    display: flex;
+    align-items: center;
+    margin-right: rem(10);
+    gap: 4px;
+  }
+  &__stars-icon {
+    width: rem(27);
+    height: rem(27);
+    @include r($tablet) {
+      width: rem(16);
+      height: rem(16);
+    }
+  }
+  &__stars-icon--min {
+    width: rem(15);
+    height: rem(15);
+  }
+  &__count {
+    color: #A2A2BF;
+  }
+}

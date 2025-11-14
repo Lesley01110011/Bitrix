@@ -1,0 +1,132 @@
+.prod-detail-card {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: rem(30);
+    @include r($laptop) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__price-wrap {
+    display: flex;
+    align-items: center;
+    gap: rem(28);
+    @include r($laptop) {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  &__current-price {
+    font-family: $font-accent;
+    font-size: rem(48);
+    @include r($mobileSmall) {
+      font-size: rem(32);
+    }
+  }
+
+  &__old-price {
+    font-size: rem(24);
+    font-weight: 600;
+    color: $color-grayPowder;
+    text-decoration: line-through;
+  }
+
+  &__serv {
+    display: block;
+    border-radius: rem(20);
+    border: 1px solid #D5D5E2;
+    padding: rem(30);
+    margin-bottom: rem(30);
+    @include r($mobile) {
+      padding: rem(20);
+    }
+    input {
+      border-radius: 50%;
+    }
+    label {
+      width: 100%;
+      max-width: 75%;
+    }
+  }
+
+  &__serv-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: rem(20);
+    margin-bottom: rem(20);
+    border-bottom: 1px solid #D5D5E2;
+    font-size: rem(20);
+    font-weight: 700;
+    @include r($mobile) {
+      font-size: rem(18);
+    }
+  }
+
+  &__serv-body {
+    height: rem(200);
+    overflow: hidden;
+    transition: height .3s ease-in-out;
+  }
+
+  &__form-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: rem(28);
+  }
+
+  &__form-price {
+    font-weight: 600;
+    font-size: rem(20);
+    @include r($mobile) {
+      font-size: rem(14);
+    }
+  }
+
+  &__show-all {
+    display: flex;
+    align-items: center;
+    gap: rem(15);
+    margin-top: rem(20);
+
+    svg {
+      width: rem(8);
+      height: rem(14);
+      fill: $color-accent;
+    }
+  }
+  &__btn-wrap {
+    display: flex;
+    gap: rem(18);
+    margin-bottom: rem(30);
+  }
+  &__btn-wrap-item {
+    flex: 1 1 100%;
+    min-width: rem(100);
+  }
+
+  &__result-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: $font-accent;
+    font-weight: 600;
+    font-size: rem(48);
+    @include r($mobile) {
+      font-size: rem(24);
+    }
+  }
+  &__result-price-text {
+    font-family: $font-main;
+    font-weight: 700;
+    font-size: rem(30);
+    @include r($mobile) {
+      font-size: rem(24);
+    }
+  }
+}

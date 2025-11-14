@@ -1,0 +1,107 @@
+.block-sort {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: rem(20);
+    margin-bottom: rem(50);
+    list-style: none;
+    @include r($mobile) {
+      position: absolute;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      left: 0;
+      top: 100%;
+      box-shadow: 0 10px 20px 0 #88919d4d;
+      background: #ffffff;
+      border-radius: rem(20);
+      padding: rem(20) 0;
+      overflow: hidden;
+      width: 100%;
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .3s ease-in-out;
+      &.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &__list-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: rem(10);
+    height: rem(50);
+    padding: rem(15.5) rem(25);
+    border-radius: rem(15);
+    outline: 1px solid $color-accent;
+    font-weight: 600;
+    transition: all .3s ease-in-out;
+    @include r($mobile) {
+      outline: none;
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+
+  &__list-item.active {
+    background-color: $color-second;
+    outline-color: $color-second;
+    @include r($mobile) {
+      background-color: rgba(190, 247, 46, 0.3);
+    }
+  }
+
+  &__dropdown {
+    position: relative;
+    margin-bottom: rem(20);
+  }
+
+  &__dropdown-icon {
+    display: none;
+    visibility: hidden;
+    @include r($mobile) {
+      display: block;
+      visibility: visible;
+      position: absolute;
+      top: 50%;
+      right: rem(25);
+      width: rem(14);
+      height: rem(8);
+      transform-origin: top;
+      transform: rotate(90deg) translateY(-50%);
+    }
+  }
+
+  &__dropdown-button {
+    display: none;
+    visibility: hidden;
+    @include r($mobile) {
+      display: flex;
+      visibility: visible;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      width: 100%;
+      height: rem(50);
+      padding: rem(15.5) rem(25);
+      border-radius: rem(15);
+      outline: 1px solid $color-accent;
+      font-weight: 600;
+      transition: all .3s ease-in-out;
+    }
+
+    &.active + svg {
+      transform: rotate(270deg) translateY(-50%);
+    }
+  }
+
+  &__dropdown-input {
+    display: none;
+    visibility: hidden;
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <%= htmlWebpackPlugin.options.head %>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body class="body">
+<div class="main-container">
+  <%= htmlWebpackPlugin.options.sectionHeader %>
+  <main class="main">
+    <section class="section mt-30 mb-30 mtm-15 mbm-20">
+      <div class="container">
+        <%= htmlWebpackPlugin.options.breadcrumbs %>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__header mb-50 mbm-20">
+        <div class="container">
+          <h1 class="title">Услуги</h1>
+        </div>
+      </div>
+      <div class="section--color section--full-height pt-80 pb-120 ptm-20 pbm-30">
+        <div class="block-sort" data-sort-list>
+          <div class="container">
+            <div class="block-sort__dropdown" data-select>
+              <button class="block-sort__dropdown-button" type="button" data-select-btn>
+                <span>Все</span>
+              </button>
+              <svg class="block-sort__dropdown-icon">
+                <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+              </svg>
+              <ul class="block-sort__list services-sort" data-select-list>
+                <li class="block-sort__list-item services-sort__btn active" role="option" data-value="Все" data-sort-btn="all">
+                  Все 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Дизайн"
+                    data-sort-btn="design">Дизайн 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Интеграция"
+                    data-sort-btn="integration">Интеграция 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Верстка"
+                    data-sort-btn="typesetting">Верстка 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Тех поддержка"
+                    data-sort-btn="support">Тех поддержка 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Контент"
+                    data-sort-btn="content">Контент 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="SEO" data-sort-btn="seo">
+                  SEO 39</li>
+              </ul>
+              <input class="block-sort__dropdown-input" type="text" name="select-category" value="" data-select-input />
+            </div>
+            <div class="block-sort-grid mb-60 mbm-20">
+              <div class="block-sort-grid__item" data-sort-item="design">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="seo">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="integration">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="typesetting">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="seo">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="integration">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="content">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="support">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="seo">
+                <%= htmlWebpackPlugin.options.cardSrv %>
+              </div>
+
+            </div>
+            <button class="button button--fill centered mb-60 mbm-0" type="button">Показать еще +10</button>
+            <div class="mob-hidden">
+              <%= htmlWebpackPlugin.options.pagination %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%= htmlWebpackPlugin.options.sectionFooter %>
+  <%= htmlWebpackPlugin.options.temp %>
+</div>
+</body>
+</html>

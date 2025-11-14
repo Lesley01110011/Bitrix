@@ -1,0 +1,129 @@
+.intro {
+  padding: rem(40) 0 rem(200);
+  @include r($tablet) {
+    padding: rem(16) 0 0;
+    margin-bottom: rem(30);
+  }
+  @include r($mobile) {
+    padding-top: rem(5);
+    height: rem(620);
+    overflow: hidden;
+  }
+
+  &__inner {
+    display: flex;
+    background-color: $color-second;
+    border-radius: rem(80);
+    padding: rem(123.5) rem(100);
+    height: rem(652);
+    background-image: url("../assets/images/icon-intro-bg.svg");
+    background-position: center right -40%;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    @include r($tablet) {
+      flex-direction: column;
+      gap: rem(60);
+      padding: rem(50) rem(70);
+      border-radius: rem(20);
+      background-size: 200% 200%;
+      background-position: center left -45%;
+      overflow: hidden;
+    }
+    @include r($mobile) {
+      padding: rem(25);
+      height: rem(613);
+
+    }
+  }
+
+  &__content {
+    width: 50%;
+    position: relative;
+    @include r(1300) {
+      top: rem(-30);
+    }
+    @include r($tablet) {
+      top: 0;
+      width: 100%;
+      & .decor--border {
+        margin: rem(5) 0;
+      }
+    }
+  }
+
+  &__title {
+    margin-bottom: rem(30);
+    @include r($mobile) {
+      margin-bottom: rem(15);
+      line-height: 1.2;
+    }
+  }
+
+  &__text {
+    width: 100%;
+    font-size: calc(16px + 8 * ((100vw - 320px) / (1920 - 320)));
+    @include rmin(1920) {
+      font-size: rem(24);
+    }
+    @include r(1300) {
+      width: 80%;
+    }
+    @include r($tablet) {
+      width: 50%;
+    }
+    @include r($mobile) {
+      width: 100%;
+    }
+  }
+
+  &__picture {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  &__picture-main {
+    position: absolute;
+    top: rem(-43);
+    right: calc(-40% - 72px);
+    width: rem(891);
+    height: rem(770);
+    @include r(1170) {
+      right: calc(-63% - 92px);
+    }
+    @include r($tablet) {
+      top: rem(-280);
+      right: calc(-40% - 72px);
+    }
+    @include r($mobile) {
+      top: 0;
+      height: rem(435);
+      right: rem(-350);
+    }
+    @include r($mobileSmall) {
+      top: rem(7);
+      height: rem(340);
+      right: rem(-431);
+    }
+  }
+
+  &__badge {
+    top: rem(-15);
+    left: rem(10);
+    @include r(1300) {
+      top: auto;
+      left: rem(-80);
+      bottom: -80%;
+    }
+    @include r($tablet) {
+      top: 0;
+      left: rem(10);
+    }
+    @include r($mobileSmall) {
+      top: rem(-35);
+      left: 3px;
+    }
+  }
+}

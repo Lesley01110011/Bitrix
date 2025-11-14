@@ -1,0 +1,33 @@
+.tooltip {
+  position: relative;
+  cursor: pointer;
+
+  &:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    display: block;
+    width: rem(200);
+    height: fit-content;
+    top: 75%;
+    right: rem(25);
+    padding: rem(15);
+    border-radius: rem(10);
+    background-color: #FFFFFF;
+    font-size: rem(16);
+    color: $color-grayDark;
+    font-weight: 400;
+    border: 1px solid #D5D5E2;
+    box-shadow: 5px 5px 10px 0 rgba(65, 78, 124, 0.15);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+  }
+  &:hover:before {
+    opacity: 1;
+  }
+
+  svg {
+    width: rem(24);
+    height: rem(24);
+  }
+}

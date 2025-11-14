@@ -1,0 +1,53 @@
+@use "sass:math";
+
+@function rem($pixels) {
+  @return calc(($pixels / 16) * 1rem);
+}
+
+// text by circle
+@for $i from 1 through 360 {
+  .char-#{$i} {
+    transform: rotate(($i*12)+deg);
+  }
+}
+
+//rating
+@for $i from 1 through 5 {
+  .rating__stars-icon {
+    fill: transparent;
+  }
+
+  @for $j from $i through 5 {
+    .rating__stars[data-rating='#{$j}'] {
+      .rating__stars-icon:nth-child(#{$i}) {
+        fill: #FFCE31;
+      }
+    }
+  }
+}
+
+// width
+@mixin r($width) {
+  @media only screen and (max-width: $width+ "px") {
+    @content
+  }
+}
+
+@mixin rmin($width) {
+  @media only screen and (min-width: $width+ "px") {
+    @content
+  }
+}
+
+// height
+@mixin rh($height) {
+  @media only screen and (max-height: $height + "px") {
+    @content
+  }
+}
+
+@mixin rhmin($height) {
+  @media only screen and (min-height: $height + "px") {
+    @content
+  }
+}

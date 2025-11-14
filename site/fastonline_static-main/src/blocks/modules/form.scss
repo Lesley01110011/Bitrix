@@ -1,0 +1,138 @@
+.form {
+  label {
+    display: block;
+    position: relative;
+
+    span {
+      color: #A2A2BF;
+      font-size: rem(14);
+      position: absolute;
+      top: rem(20);
+      left: rem(20);
+      transition: all .3s ease-in-out;
+      @include r($mobile) {
+        font-size: rem(12);
+      }
+    }
+  }
+
+  input,
+  textarea {
+    display: block;
+    flex-shrink: 0;
+    width: 100%;
+    height: rem(60);
+    padding: rem(30) rem(20) rem(8);
+    border: 1px solid #D8E3ED;
+    background-color: #FFFFFF;
+    border-radius: rem(10);
+    transition: all .3s ease-in-out;
+    @include r($mobile) {
+      padding: rem(23) rem(10) rem(8);
+    }
+
+    &::placeholder {
+      opacity: 0;
+    }
+
+    &:focus {
+      box-shadow: 0 4px 8px 0 rgba(34, 60, 80, 0.2);
+    }
+
+    &:focus + span,
+    &:not(:placeholder-shown) + span {
+      top: rem(8);
+      left: rem(20);
+      @include r($mobile) {
+        top: 5px;
+      }
+    }
+  }
+
+  textarea {
+    min-height: rem(85);
+
+    &::-webkit-scrollbar {
+      width: rem(4);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      width: rem(4);
+      border-radius: 4px;
+      background-color: $color-accent;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+  }
+
+  input[type="checkbox"] {
+    position: relative;
+    overflow: hidden;
+    width: rem(20);
+    height: rem(20);
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      @include rmin($tablet) {
+        background-color: #E3D7FE;
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: url("../assets/images/icon-agree.svg") center no-repeat;
+      background-size: rem(12);
+    }
+
+    &:checked:after {
+      background-color: $color-accent;
+      top: 50%;
+      left: 50%;
+    }
+  }
+
+  input[data-valid="false"] {
+    border-color: #f72e64;
+  }
+
+  a {
+    color: $color-accent;
+  }
+
+  button[type=submit] {
+    &:focus {
+      box-shadow: 0 4px 8px 0 rgba(34, 60, 80, 0.4);
+    }
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    gap: rem(15);
+    margin-bottom: rem(25);
+  }
+
+  &__bottom {
+    gap: rem(25);
+  }
+
+  &__agreement {
+    display: flex;
+    gap: rem(10);
+    font-size: rem(14);
+    @include r($mobile) {
+      font-size: rem(12);
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.sticky {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  &__inner {
+    position: sticky;
+    width: 100%;
+  }
+}

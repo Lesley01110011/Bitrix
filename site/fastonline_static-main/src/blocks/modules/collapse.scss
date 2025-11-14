@@ -1,0 +1,42 @@
+.collapse {
+  &__wrapper {
+    width: 100%;
+  }
+
+  &__item {
+    width: 100%;
+  }
+
+  &__trigger {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .3s ease-in-out;
+
+    &:focus {
+      .collapse__content {
+        height: auto;
+        max-height: fit-content;
+      }
+    }
+  }
+
+  &__content {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  &__content.collapse-show {
+    height: auto;
+    max-height: fit-content;
+  }
+
+  &__icon {
+    transition: all .3s ease-in-out;
+  }
+
+  &__icon.active {
+transform: rotate(90deg);
+  }
+}

@@ -1,0 +1,86 @@
+.sorting {
+  display: flex;
+  justify-content: flex-end;
+  gap: rem(10);
+
+  @include r($laptop-min) {
+    flex-direction: column;
+    background-color: #FFFFFF;
+    padding: rem(18);
+    border-radius: rem(30) rem(30) 0 0;
+  }
+
+  &__item {
+    label {
+      display: flex;
+      align-items: center;
+      position: relative;
+      border-radius: rem(8);
+      background-color: #FFFFFF;
+      padding: rem(11.5) rem(16);
+      cursor: pointer;
+      @include r($laptop-min) {
+        gap: rem(10);
+      }
+    }
+
+    input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+      &:checked {
+        background-color: transparent;
+        background-image: none;
+      }
+      @include r($laptop-min) {
+        position: relative;
+        width: rem(20);
+        height: rem(20);
+        border: 1px solid #D5D5E2;
+        border-radius: rem(5);
+        transition: all .3s ease-in-out;
+        &:checked {
+          background-color: $color-accent;
+          background-image: url("../assets/images/icon-tick.svg");
+        }
+      }
+
+      &:checked {
+        & + div > span {
+          color: $color-accent;
+        }
+
+        & + div > svg {
+          fill: $color-accent;
+          transform: rotate(270deg);
+        }
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: rem(20);
+    }
+
+    span {
+      font-size: rem(14);
+      transition: all .3s ease-in-out;
+    }
+
+    svg {
+      width: rem(10);
+      height: rem(10);
+      transform: rotate(90deg);
+      transition: all .3s ease-in-out;
+      @include r($laptop-min) {
+        display: none;
+        visibility: hidden;
+      }
+    }
+  }
+}

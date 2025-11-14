@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="194x194" href="./assets/favicon/favicon-194x194.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="./assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <title>Как пользоваться сервисом</title>
+<link href="./css/main.css" rel="stylesheet"></head>
+<body class="body">
+<div class="main-container">
+    <header class="header">
+  <div class="container">
+    <div class="header__block header__top">
+      <a class="logo header__logo" href="./">
+        <img src="./assets/images/logo-fast-online.svg" alt="FASTonline">
+      </a>
+      <div class="search header__search mob-hidden">
+        <form action="#">
+          <label>
+            <input type="search" placeholder="Поиск по сайту...">
+          </label>
+          <button class="search__button" type="submit">
+            <svg class="search__button-icon">
+              <use xlink:href="./assets/sprite.svg#icon-search"></use>
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div class="header__callback">
+        <div class="header__callback-link">
+          <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+          <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+        </div>
+      </div>
+      <div class="header__toolbar">
+        <a class="header__toolbar-link" href="#">
+          <svg class="header__toolbar-icon">
+            <use xlink:href="./assets/sprite.svg#icon-fav"></use>
+          </svg>
+        </a>
+        <div class="search header__search only-mobile">
+          <form action="#">
+            <label data-search-field-mobile>
+              <input type="search" placeholder="Поиск по сайту...">
+            </label>
+            <button class="search__button" type="submit" tabindex="0" data-search-button-mobile>
+              <svg class="search__button-icon">
+                <use xlink:href="./assets/sprite.svg#icon-search"></use>
+              </svg>
+            </button>
+          </form>
+        </div>
+        <a class="header__toolbar-link cart" href="#">
+          <span class="cart__count">42</span>
+          <svg class="header__toolbar-icon">
+            <use xlink:href="./assets/sprite.svg#icon-cart"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="header__account">
+        <a class="button--light header__account-link" href="#">
+          <span>Войти</span>
+          <svg class="header__account-icon">
+            <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="header__menu-btn" data-toggle-menu>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="header__block header__bottom menu-mobile" data-mobile-menu>
+      <nav class="nav header__nav menu-mobile__nav">
+        <ul class="nav__list menu-mobile__list">
+          <li>
+            <a class="nav__link nav__link--accent menu-mobile__link" href="#">
+              <div class="nav__link-icon burger tab-hidden">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>Каталог</span>
+            </a>
+            <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Услуги</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Новинки</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Акции</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Битрикс</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Отзывы</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Как купить</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Портфолио</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Вопрос-ответ</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>О проекте</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li>
+            <a class="nav__link menu-mobile__link" href="#">
+              <span>Контакты</span>
+            </a>
+             <svg class="menu-mobile__link-icon">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+        </ul>
+        <div class="menu-mobile__nav-bottom">
+          <div class="header__account header__account--mobile">
+            <a class="header__account-link" href="#">
+              <span>Войти</span>
+              <svg class="header__account-icon">
+                <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="header__callback header__callback--mobile">
+            <div class="header__callback-link">
+              <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+              <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <main class="main">
+        <section class="section mt-30 mb-30 mtm-15 mbm-20">
+            <div class="container">
+                <div class="breadcrumbs">
+  <a class="breadcrumbs__link" href="./">Главная</a>
+  <span class="breadcrumbs__curr-page">Каталог шаблонов</span>
+</div>
+            </div>
+        </section>
+        <section class="section mb-70">
+            <div class="section__header section__header--centered mb-120 mbm-20">
+                <div class="container">
+                    <h1 class="title center mb-25">Как <span class="title title--accent">пользоваться</span> сервисом</h1>
+                    <p class="title__subtitle title__subtitle--medium center">
+                        В нашем маркетплейсе вы найдете широкий <br/> ассортимент готовых веб-сайтов и
+                        интернет-магазинов <br/> для самых разнообразных направлений бизнеса.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="section mb-270 mbm-0">
+            <div class="container">
+                <div class="promo-block promo-block--purple">
+                    <picture class="promo-block__picture">
+                        <img src="./assets/images/icon-line-curve.svg" alt="">
+                    </picture>
+                    <img class="promo-block__item" src="./assets/images/preview-1.png" alt="">
+                    <img class="promo-block__item" src="./assets/images/preview-2.png" alt="">
+                    <img class="promo-block__item" src="./assets/images/preview-3.png" alt="">
+                </div>
+            </div>
+        </section>
+        <section class="section section--color section--background pt-230 ptm-80 pbm-600 pb-240"
+                 style="background-image: url('./assets/images/mockup.png')">
+            <div class="container">
+                <div class="columns">
+                    <div class="columns__col--5 columns__col-laptop--6 columns__col-tab--12">
+                        <div class="number mb-40 mbm-25" style="background-image: url('./assets/images/icon-curve.svg')">
+                            <p class="number__text">1</p>
+                        </div>
+                        <h2 class="title title--small title--tablet">
+                            Используйте <span class="title--accent">удобный фильтр</span>
+                            в каждой категории, чтобы подобрать идеальный вариант, отталкиваясь от тематики, ценовой
+                            категории и других важных критериев.
+                        </h2>
+                    </div>
+                    <div class="columns__col--7 columns__col-laptop--6 columns__col-tab--12">
+                        <img class="decor-picture" src="./assets/images/filter.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section pt-160 pb-160 ptm-90 pbm-90 section--background"
+                 style="background-image: url('./assets/images/icon-curve-2.svg')">
+            <div class="container mbt-40">
+                <div class="columns">
+                    <div class="columns__col--4 columns__col-tab--12">
+                        <div class="number mb-40 mbm-25" style="background-image: url('./assets/images/icon-curve.svg')">
+                            <p class="number__text">2</p>
+                        </div>
+                        <h2 class="title title--tablet title--extra-small mb-30">
+                            Для интеграции и последующего управления приобретенным продуктом, вам потребуется платформа
+                            управления контентом Битрикс, которая позволяет вносить изменения в ваш сайт или
+                            интернет-магазин без глубоких знаний в программировании.
+                        </h2>
+                        <p class="text-small">
+                            Подробности о каждом продукте, включая цену
+                            и ссылку на демо-версию, а также совместимые версии Битрикс и условия покупки, вы найдете на
+                            странице товара.
+                        </p>
+                    </div>
+                    <div class="columns__col--4 tab-hidden">
+                        <article class="article-product mt-160">
+                            <picture class="article-product__picture article-product__picture--purple">
+                                <img src="./assets/images/bitrix.png" alt="">
+                            </picture>
+                            <p class="article-product__detail">
+                                Покупка только готового решения, предназначенная для пользователей, уже работающих на
+                                платформе Битрикс с необходимым функционалом. Предлагается возможность покупки в
+                                рассрочку на 12 месяцев без дополнительных переплат.
+                            </p>
+                        </article>
+                    </div>
+                    <div class="columns__col--4 tab-hidden">
+                        <article class="article-product">
+                            <picture class="article-product__picture article-product__picture--green">
+                                <img src="./assets/images/bitrix.png" alt="">
+                            </picture>
+                            <p class="article-product__detail">
+                                Приобретение полного комплекта для запуска, который включает в себя как выбранное
+                                решение, так и необходимую версию Битрикс, с преимуществом получения скидки и бесплатной
+                                установки.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="container only-tablet">
+                <div class="columns">
+                    <div class="columns__col--12">
+                        <div class="slider slider--visible" data-slider data-slider-slides-tab="2">
+                            <div class="swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <article class="article-product mt-160 mtt-0">
+                                            <picture class="article-product__picture article-product__picture--purple">
+                                                <img src="./assets/images/bitrix.png" alt="">
+                                            </picture>
+                                            <p class="article-product__detail">
+                                                Покупка только готового решения, предназначенная для пользователей, уже работающих на
+                                                платформе Битрикс с необходимым функционалом. Предлагается возможность покупки в
+                                                рассрочку на 12 месяцев без дополнительных переплат.
+                                            </p>
+                                        </article>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <article class="article-product">
+                                            <picture class="article-product__picture article-product__picture--green">
+                                                <img src="./assets/images/bitrix.png" alt="">
+                                            </picture>
+                                            <p class="article-product__detail">
+                                                Приобретение полного комплекта для запуска, который включает в себя как выбранное
+                                                решение, так и необходимую версию Битрикс, с преимуществом получения скидки и бесплатной
+                                                установки.
+                                            </p>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="slider__pagination" data-slider-pagination></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section section--color section--background pt-55 ptm-50 pb-55 pbm-50 mb-160 mbm-90"
+                 style="background-image: url('./assets/images/icon-vortex.svg'); background-position: center right; background-size: contain">
+            <div class="container">
+                <div class="columns">
+                    <div class="columns__col--5 columns__col-tab--12 order-tab--2 z-index-1">
+                        <div class="number mb-40 mbt-375" style="background-image: url('./assets/images/icon-curve.svg')">
+                            <p class="number__text">3</p>
+                        </div>
+                        <h2 class="title title--tablet title--extra-small mb-40">
+                            Для оформления заказа добавьте товары в корзину
+                            и просто нажмите на кнопку «Заказать»,
+                            расположенную в правом верхнем углу страницы.<br/><br/>
+                            Кроме того, наш маркетплейс предлагает услуги
+                            по верстке, дизайну и SEO-продвижению, расширяя горизонты вашего бизнеса. И если вам нужны
+                            готовые решения не только для Битрикс, но и для таких
+                            платформ как WordPress, Joomla или Opencart,
+                            вы обязательно найдете что-то подходящее у нас.
+                        </h2>
+                        <a class="button button--fill" href="#">Перейти в каталог</a>
+                    </div>
+                    <div class="columns__col--7 columns__col-tab--12 order-tab--1">
+                        <img class="decor-picture-guide" src="./assets/images/payment-guide.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section mb-100">
+            <div class="section__header section__header--centered mb-90 mbm-20">
+                <div class="container">
+                    <h1 class="title center mb-25">Способы <span class="title title--accent">оплаты</span></h1>
+                    <p class="title__subtitle title__subtitle--medium center">
+                        Мы стремимся предложить вам максимально<br/> удобные и безопасные способы оплаты.
+                    </p>
+                </div>
+            </div>
+            <div class="container">
+                <article class="article-advantages pt-160 ptm-20 pb-160 pbm-215 mb-40 mbm-140">
+                    <div class="columns">
+                        <div class="columns__col--1 tab-hidden"></div>
+                        <div class="columns__col--5 columns__col-tab--12">
+                            <div class="article-advantages__detail">
+                                <div class="payment-types mb-50 mbm-20">
+                                    <div class="payment-types__item">
+                                        <img src="./assets/images/logo-visa.png" alt="">
+                                    </div>
+                                    <div class="payment-types__item">
+                                        <img src="./assets/images/logo-mastercard.png" alt="">
+                                    </div>
+                                    <div class="payment-types__item">
+                                        <img src="./assets/images/logo-sber.png" alt="">
+                                    </div>
+                                    <div class="payment-types__item">
+                                        <img src="./assets/images/logo-mir.png" alt="">
+                                    </div>
+                                    <div class="payment-types__item">
+                                        <img src="./assets/images/logo-union.png" alt="">
+                                    </div>
+                                </div>
+                                <h2 class="article-advantages__title title title--small">Банковские карты</h2>
+                                <ul class="article-advantages__list">
+                                    <li class="article-advantages__item">
+                                        Оплатить заказ можно с помощью банковских карт через Интернет с использованием
+                                        систем электронных платежей. Важно, чтобы номер карты (PAN) содержал от 15 до 19
+                                        символов.
+                                    </li>
+                                    <li class="article-advantages__item">
+                                        Мы поддерживаем платежи с помощью карт Visa, MasterCard, МИР, UnionPay, SberPay,
+                                        Белкарт, обеспечивая широкий выбор вариантов для наших клиентов.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="columns__col--6 columns__col-tab--12">
+                            <img class="article-advantages__img" src="./assets/images/cards.png" alt=""
+                                 style="right: 0">
+                        </div>
+                    </div>
+                </article>
+                <article class="article-advantages pt-125 ptm-20 pb-125 pbm-260 mb-40">
+                    <div class="columns">
+                        <div class="columns__col--6 columns__col-tab--12 order-tab--2">
+                            <img class="article-advantages__img article-advantages__img--second" src="./assets/images/sbp.png" alt=""
+                                 style="left: 0;">
+                        </div>
+                        <div class="columns__col--5  columns__col-tab--12 order-tab--1">
+                            <div class="article-advantages__detail">
+                                <h2 class="article-advantages__title title title--small">Система Быстрых Платежей</h2>
+                                <ul class="article-advantages__list">
+                                    <li class="article-advantages__item">
+                                        СБП представляет собой сервис платежной системы Банка России, позволяющий
+                                        физическим лицам оплачивать товары и услуги через любой банк-участник этой
+                                        системы.
+                                    </li>
+                                    <li class="article-advantages__item">
+                                        Полный список банков-участников СБП доступен на официальном сайте системы
+                                        быстрых платежей.
+                                    </li>
+                                    <li class="article-advantages__item">
+                                        Безопасность каждого перевода гарантирована благодаря современным системам
+                                        защиты, действующим на стороне всех участников СБП: от банков до Банка России и
+                                        НСПК. Система соответствует всем мировым стандартам информационной безопасности.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="section mb-150">
+            <div class="container">
+                <div class="columns">
+                    <div class="columns__col--9 columns__col-laptop-min--12">
+                        <h3 class="title title--extra-small mb-25">Условия гарантии</h3>
+                        <p class="title__subtitle mb-50">
+                            Наши программные продукты предоставляются на условиях "как есть". В случае обнаружения
+                            ошибок, сбоев, функциональных несоответствий или других недостатков в процессе использования
+                            продукта, все указанные проблемы будут решаться в рамках предоставляемой технической
+                            поддержки. Ответственность за техническую поддержку каждого продукта несет его разработчик
+                            или производитель. Инструкция по обращению за поддержкой, а также дополнительные детали
+                            будут отправлены вам по электронной почте сразу после покупки продукта.
+                        </p>
+                        <h3 class="title title--extra-small mb-25">Политика возврата</h3>
+                        <p class="title__subtitle">
+                            Продажа программного обеспечения имеет свои особенности, отличающие ее от продажи физических
+                            товаров или услуг. В связи с этим, программные продукты "1C-Битрикс", а также готовые
+                            решения с "1C-Битрикс: Маркетплейс" не подлежат возврату.
+                            Оплата программного продукта влечет за собой генерацию уникального лицензионного ключа,
+                            который является ключевым элементом вашей покупки и активирует ваш экземпляр продукта или
+                            доступ к нему. Создание лицензионного ключа фактически означает использование продукта,
+                            исключая возможность его возврата. Поэтому мы настоятельно рекомендуем вам тщательно
+                            ознакомиться с продуктом перед покупкой.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <a class="logo footer__logo" href="./">
+        <img src="./assets/images/logo-fast-online-light.svg" alt="FASTonline">
+      </a>
+        <div class="footer__copyright only-mobile">
+          &#169; Fast.online 2023
+        </div>
+      <nav class="nav footer__nav">
+        <ul class="nav__list footer__nav-list">
+          <li>
+            <a class="nav__link" href="#">
+              <span>О проекте</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">
+              <span>Контакты</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">
+              <span>Блог</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">
+              <span>Как купить</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">
+              <span>Вопрос-ответ</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">
+              <span>Отзывы</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="#">
+              <span>Карта сайта</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <a class="button button--fill footer__top-button" href="#" target="_blank">Войти в личный кабинет</a>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__bottom-block">
+        <div class="footer__copyright mob-hidden">
+          &#169; Fast.online 2023
+        </div>
+        <div class="footer__pay-block">
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-mir"></use>
+            </svg>
+          </a>
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-visa"></use>
+            </svg>
+          </a>
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-mastercard"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__bottom-block">
+        <div class="footer__contacts">
+          <div class="footer__contacts-item">
+            <a class="footer__contacts-text-bold" href="tel:+78000000000">8 800 000 0000</a>
+            <a class="footer__contacts-text footer__contacts-text--accent" data-fancybox href="#modalCallback">Заказать звонок</a>
+          </div>
+          <a class="footer__contacts-item" href="mailto:info@fast-online.ru">
+            <p class="footer__contacts-text-bold">info@fast-online.ru</p>
+            <p class="footer__contacts-text">по общим вопросам</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__info">
+      <a class="footer__info-link" href="#">Пользовательское соглашение</a>
+      <a class="footer__info-link" href="#">Политика конфиденциальности</a>
+      <a class="footer__info-link" href="#">Договор оферты</a>
+    </div>
+  </div>
+</footer>
+<button class="back-to-top" type="button" data-top>
+  <svg class="back-to-top__icon">
+    <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+  </svg>
+  <span class="back-to-top__text">Наверх</span>
+</button>
+<div hidden="hidden">
+  <div class="modal" id="modalCallback">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Заказать обратный звонок</div>
+      <form class="form" action="#" data-form>
+        <div class="form__block">
+          <label>
+            <input type="text" placeholder="Имя Отчество" name="name">
+            <span>Имя Отчество</span>
+          </label>
+          <label>
+            <input type="email" placeholder="Email" name="email">
+            <span>Email</span>
+          </label>
+          <label>
+            <input type="tel" placeholder="Телефон" name="phone" data-tel>
+            <span>Телефон</span>
+          </label>
+          <label>
+            <textarea placeholder=""></textarea>
+            <span>Комментарий...</span>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement">
+            <label>
+              <input type="checkbox" name="agreement" data-form-agreement>
+            </label>
+            <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+              конфиденциальности</a>
+              и принимаю условия <a href="#">Пользовательского соглашения</a>
+            </div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+            Отправить
+          </button>
+        </div>
+        <div class="modal__msg" data-form-success>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-success"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Сообщение успешно отправлено!
+            </div>
+          </div>
+
+        </div>
+        <div class="modal__msg" data-form-error>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-error"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal" id="modalRewiew">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Оставить отзыв</div>
+      <form class="form" action="#" data-form>
+        <div class="form__block">
+          <label>
+            <input type="text" placeholder="Имя Отчество" name="name">
+            <span>Имя Отчество</span>
+          </label>
+          <label>
+            <input type="email" placeholder="Email" name="email">
+            <span>Email</span>
+          </label>
+          <label>
+            <textarea placeholder=""></textarea>
+            <span>Комментарий...</span>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement">
+            <label>
+              <input type="checkbox" name="agreement" data-form-agreement>
+            </label>
+            <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+              конфиденциальности</a>
+              и принимаю условия <a href="#">Пользовательского соглашения</a>
+            </div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+            Отправить
+          </button>
+        </div>
+        <div class="modal__msg" data-form-success>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-success"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Сообщение успешно отправлено!
+            </div>
+          </div>
+
+        </div>
+        <div class="modal__msg" data-form-error>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-error"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+    <!-- Это временная секция, здесь ссылки на все страницы. На продакшене ее не будет -->
+<section class="section">
+  <div class="container">
+    <style>
+        .temp {
+            gap: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 60px 0;
+        }
+
+        .temp__link {
+            color: inherit;
+            font-size: 16px;
+            text-decoration: underline;
+        }
+
+        .temp__link:hover {
+            text-decoration: none;
+        }
+    </style>
+    <div class="temp">
+      <a href="./index.html" class="temp__link">Главная</a>
+      <a href="./catalog.html" class="temp__link">Каталог</a>
+      <a href="./catalog-category.html" class="temp__link">Каталог. Категория товаров / шаблоны</a>
+      <a href="./catalog-detail.html" class="temp__link">Каталог. Карточка товара / шаблон</a>
+      <a href="./services.html" class="temp__link">Страница услуг</a>
+      <a href="./services-detail.html" class="temp__link">Деталка услуги</a>
+      <a href="./reviews.html" class="temp__link">Отзывы</a>
+      <a href="./faq.html" class="temp__link">Вопрос-ответ</a>
+      <a href="./contacts.html" class="temp__link">Контакты</a>
+      <a href="./about-service.html" class="temp__link">О сервисе</a>
+      <a href="./howitwork.html" class="temp__link">Как пользоваться сервисом</a>
+    </div>
+  </div>
+</section>
+</div>
+<script defer src="js/bundle.js"></script></body>
+</html>

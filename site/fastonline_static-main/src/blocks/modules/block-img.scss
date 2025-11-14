@@ -1,0 +1,37 @@
+.block-img {
+  &__content {
+  }
+
+  &__picture {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -20px;
+    left: -55px;
+    width: 717px;
+    height: rem(480);
+
+    img, svg {
+      width: 100%;
+      height: auto;
+      min-height: 100%;
+      object-position: right;
+      object-fit: contain;
+    }
+  }
+  &__picture-laptop {
+    position: relative;
+    top: rem(-50);
+    left: rem(29);
+    width: 100%;
+    height: rem(465);
+    @include r($tablet) {
+      top: 0;
+      left: 0;
+    }
+    @include r($mobile) {
+      height: rem(250);
+    }
+  }
+
+}

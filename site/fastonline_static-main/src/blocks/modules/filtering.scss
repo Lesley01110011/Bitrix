@@ -1,0 +1,12 @@
+.filtering {
+  display: none;
+  visibility: hidden;
+  position: absolute;
+  @include r($laptop-min) {
+    display: flex;
+    align-items: center;
+    gap: rem(20);
+    position: relative;
+    visibility: visible;
+  }
+}

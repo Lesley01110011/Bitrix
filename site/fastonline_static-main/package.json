@@ -1,0 +1,73 @@
+{
+  "name": "locky",
+  "version": "0.2.0",
+  "description": "Web development template",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --node-env=development",
+    "build-minify": "webpack --node-env=production",
+    "serve": "webpack serve",
+    "server": "json-server -p3001 --watch data.json",
+    "lint": "npx eslint src/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MaryAtame/webpack_template"
+  },
+  "keywords": [
+    "webpack",
+    "scss"
+  ],
+  "author": "https://github.com/MaryAtame",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaryAtame/webpack_template/issues"
+  },
+  "homepage": "https://github.com/MaryAtame/webpack_template#readme",
+  "devDependencies": {
+    "@babel/core": "7.21.4",
+    "@babel/preset-env": "7.21.4",
+    "autoprefixer": "10.4.13",
+    "babel-loader": "9.1.2",
+    "clean-webpack-plugin": "4.0.0",
+    "copy-webpack-plugin": "11.0.0",
+    "css-loader": "6.7.1",
+    "eslint": "8.26.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "file-loader": "6.2.0",
+    "group-css-media-queries-loader": "4.3.0",
+    "image-webpack-loader": "8.1.0",
+    "json-server": "0.17.0",
+    "mini-css-extract-plugin": "2.6.1",
+    "postcss": "8.4.23",
+    "postcss-loader": "7.2.4",
+    "postcss-preset-env": "8.3.2",
+    "prettier": "2.7.1",
+    "resolve-url-loader": "5.0.0",
+    "sass": "1.62.1",
+    "sass-loader": "13.2.2",
+    "style-loader": "3.3.2",
+    "svg-sprite-loader": "6.0.11",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.11.1"
+  },
+  "dependencies": {
+    "@fancyapps/ui": "5.0.17",
+    "axios": "0.27.2",
+    "gsap": "npm:@gsap/shockingly@^3.12.2",
+    "html-webpack-plugin": "5.5.0",
+    "swiper": "8.4.4",
+    "the-new-css-reset": "1.7.3"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie < 11",
+    "last 2 versions",
+    "> 1%",
+    "iOS 7",
+    "last 3 iOS versions"
+  ]
+}

@@ -1,0 +1,37 @@
+.payment-types {
+  display: flex;
+  align-items: center;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 65px;
+    height: 65px;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: $color-light;
+    border: 1px solid $color-grayLight;
+    box-shadow: 0 12px 34px 0 #94979A59;
+
+    img {
+      display: flex;
+      object-fit: none;
+    }
+
+    &:first-child {
+      background-color: $color-blue;
+    }
+
+    &:not(:first-child) {
+      margin-left: -18px;
+    }
+  }
+
+  @for $i from 1 through 5 {
+    .payment-types__item:nth-child(#{$i}) {
+      z-index: 6 - $i;
+    }
+  }
+}

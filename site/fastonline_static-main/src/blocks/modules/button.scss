@@ -1,0 +1,133 @@
+.button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(10);
+  width: fit-content;
+  min-width: rem(250);
+  height: rem(60);
+  padding: rem(23) rem(60);
+  border-radius: rem(15);
+  font-size: calc(16px + 4 * ((100vw - 320px) / (1920 - 320)));
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all .3s ease-out;
+
+  @include rmin(1920) {
+    font-size: rem(20);
+  }
+  @include r($mobile) {
+    padding: rem(23) rem(30);
+  }
+
+  svg {
+    width: rem(18);
+    height: rem(18);
+    fill: #FFFFFF;
+  }
+
+  &--fill {
+    background-color: $color-accent;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: #6832DB;
+    }
+  }
+
+  &--fill-second {
+    background-color: $color-second;
+    color: $color-dark;
+
+    &:hover {
+      background-color: #A9EB01;
+    }
+
+    svg {
+      fill: $color-dark;
+    }
+  }
+
+  &--light {
+    background-color: $color-grayLight;
+    color: $color-accent;
+
+    svg {
+      fill: $color-accent;
+    }
+
+    &:hover {
+      background-color: #6832DB;
+      color: #FFFFFF;
+
+      svg {
+        fill: #FFFFFF;
+      }
+    }
+  }
+
+  &--outline {
+    outline: 1px solid $color-accent;
+    color: $color-accent;
+
+    &:hover {
+      background-color: #6832DB;
+      color: #FFFFFF;
+
+      svg {
+        fill: #FFFFFF;
+      }
+    }
+
+    svg {
+      fill: $color-accent;
+    }
+  }
+
+  &--hover-rotate {
+    &:hover {
+      svg {
+        transform-origin: center;
+        transform: rotate(45deg) translate(10px, -10px);
+      }
+    }
+  }
+
+  &--hover-transl {
+    &:hover {
+      svg {
+        transform-origin: center;
+        transform: translateX(10px) scale(1.3);
+      }
+    }
+  }
+  &--hover-scale {
+    &:hover {
+      svg {
+        transform-origin: center;
+        transform: scale(1.3);
+      }
+    }
+  }
+
+  &--mob-wide {
+    @include r($mobile) {
+      width: 100%;
+      max-width: none;
+    }
+  }
+  &--wide {
+    width: 100%;
+    max-width: rem(295);
+    white-space: nowrap;
+    @include r($mobile) {
+      max-width: none;
+    }
+  }
+  &--full-wide {
+    width: 100%;
+    max-width: none;
+  }
+
+}

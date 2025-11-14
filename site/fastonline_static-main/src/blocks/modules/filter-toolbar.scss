@@ -1,0 +1,52 @@
+.filter-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include rmin($laptop-min) {
+    position: absolute;
+    display: none;
+    visibility: hidden;
+  }
+  @include r($mobile) {
+    gap: rem(10);
+    justify-content: normal;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    gap: rem(20);
+    padding: rem(16.5) rem(15);
+    background-color: #FFFFFF;
+    border-radius: rem(10);
+    @include r($mobile) {
+      flex: 1 1 100%;
+      width: fit-content;
+    }
+
+    &.open {
+      background-color: #FFFFFF;
+      outline: 1px solid $color-accent;
+      color: $color-accent;
+
+      svg {
+        fill: $color-accent;
+      }
+    }
+  }
+
+  &__btn-text {
+    font-size: rem(14);
+    font-weight: 600;
+    transition: all .3s ease-in-out;
+  }
+
+  &__btn-icon {
+    width: rem(20);
+    height: rem(20);
+    fill: $color-dark;
+    transition: all .3s ease-in-out;
+  }
+}

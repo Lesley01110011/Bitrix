@@ -1,0 +1,102 @@
+.slider {
+  position: relative;
+  width: 100%;
+
+  &--visible {
+    .swiper {
+      overflow: visible;
+    }
+  }
+
+  &__mob-grid {
+    @include r($mobile) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: rem(15);
+    }
+    @include r($mobileSmall) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__top {
+    width: 100%;
+    height: 100%;
+    margin-bottom: rem(30);
+    @include r($mobile) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__top-slide {
+
+  }
+
+  &__bottom {
+    position: relative;
+    @include r($mobile) {
+      display: none;
+      visibility: hidden;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: rem(25);
+  }
+
+  &__controls--absolute {
+    justify-content: space-between;
+    position: absolute;
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(60);
+    height: rem(60);
+    background-color: rgba(244, 244, 249, 0.8);
+    border-radius: 50%;
+
+    svg {
+      width: rem(15);
+      height: rem(12);
+      fill: $color-accent;
+
+    }
+  }
+
+  &__button--prev {
+    svg {
+      transform: rotate(180deg);
+      transform-origin: center;
+    }
+  }
+
+  &__pagination {
+    display: none;
+    visibility: hidden;
+    @include r($mobile) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: visible;
+      margin: rem(20) 0 0;
+      gap: rem(10);
+    }
+  }
+}
+

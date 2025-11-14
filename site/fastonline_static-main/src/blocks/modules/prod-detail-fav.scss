@@ -1,0 +1,32 @@
+.prod-detail-fav {
+  display: flex;
+  align-items: center;
+  gap: rem(10);
+  white-space: nowrap;
+  cursor: pointer;
+  color: $color-accent;
+  @include r($tablet) {
+    flex: 1 1 70%;
+    justify-content: flex-end;
+  }
+  @include r($mobile) {
+    flex: 1 1 60%;
+  }
+  @include r($mobileSmall) {
+    flex: 1 1 50%;
+  }
+
+  &.active {
+    color: darken($color-second, 15%);
+
+    svg {
+      fill: darken($color-second, 15%);
+    }
+  }
+
+  svg {
+    width: rem(20);
+    height: rem(20);
+    fill: $color-accent;
+  }
+}

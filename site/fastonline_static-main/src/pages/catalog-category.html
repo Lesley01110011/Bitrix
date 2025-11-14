@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <%= htmlWebpackPlugin.options.head %>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body class="body">
+<div class="main-container">
+  <%= htmlWebpackPlugin.options.sectionHeader %>
+  <main class="main">
+    <section class="section mt-30 mb-30 mtm-15 mbm-20">
+      <div class="container">
+        <%= htmlWebpackPlugin.options.breadcrumbs %>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__header mb-50 mbm-20">
+        <div class="container">
+          <h1 class="title">Еда и продукты</h1>
+        </div>
+      </div>
+      <div class="section--color pt-55 pb-120 mb-120">
+        <div class="container">
+          <div class="columns">
+            <div class="columns__col--3">
+              <aside class="filter filter-catalog filter--mobile-view" data-filter>
+                <div class="filter--mobile">
+                  <div class="filter--mobile__title">Фильтр</div>
+                  <button class="filter--mobile__btn-close" type="button" data-close="filter">
+                    <svg>
+                      <use xlink:href="./assets/sprite.svg#icon-close"></use>
+                    </svg>
+                  </button>
+                </div>
+                <div class="filter__block">
+                  <div class="filter__block-title">Категории</div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Готовые интернет-магазины</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Досуг, развлечения, хобби</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Оборудование для бизнеса</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Одежда, обувь и аксессуары</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Зоотовары</span>
+                    </label>
+                    <span class="filter__count">(5)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Здоровье и медицина</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Тренинги, виртуальные товары</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Подарки, украшения, цветы</span>
+                    </label>
+                    <span class="filter__count">(120)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Готовые сайты</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Дом и дача</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Еда и продукты</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                  <div class="filter__block-item">
+                    <label>
+                      <input type="checkbox" name="">
+                      <span>Косметика, парфюмерия</span>
+                    </label>
+                    <span class="filter__count">(10)</span>
+                  </div>
+                </div>
+                <div class="filter__block">
+                  <div class="filter__block-title">Темы</div>
+                  <div class="collapse filter__collapse" data-collapse data-collapse-multiple data-duration="1000">
+                    <div class="collapse__wrapper filter__block-item">
+                      <div class="collapse__item" data-collapse-item>
+                        <div class="collapse__trigger filter__collapse-trigger active" data-collapse-trigger>
+                          <span>Готовые интернет-магазины</span>
+                          <svg class="collapse__icon active" data-collapse-icon>
+                            <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+                          </svg>
+                        </div>
+                        <div class="collapse__content collapse-show" data-collapse-content>
+                          <div class="collapse__inner filter__collapse-inner">
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Готовые интернет-магазины</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Досуг, развлечения, хобби</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Оборудование для бизнеса</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Одежда, обувь и аксессуары</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="collapse__wrapper filter__block-item">
+                      <div class="collapse__item" data-collapse-item>
+                        <div class="collapse__trigger filter__collapse-trigger" data-collapse-trigger>
+                          <span>Готовые интернет-магазины</span>
+                          <svg class="collapse__icon" data-collapse-icon>
+                            <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+                          </svg>
+                        </div>
+                        <div class="collapse__content" data-collapse-content>
+                          <div class="collapse__inner filter__collapse-inner">
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Готовые интернет-магазины</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Досуг, развлечения, хобби</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Оборудование для бизнеса</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Одежда, обувь и аксессуары</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="collapse__wrapper filter__block-item">
+                      <div class="collapse__item" data-collapse-item>
+                        <div class="collapse__trigger filter__collapse-trigger" data-collapse-trigger>
+                          <span>Готовые интернет-магазины</span>
+                          <svg class="collapse__icon" data-collapse-icon>
+                            <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+                          </svg>
+                        </div>
+                        <div class="collapse__content" data-collapse-content>
+                          <div class="collapse__inner filter__collapse-inner">
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Готовые интернет-магазины</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Досуг, развлечения, хобби</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Оборудование для бизнеса</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Одежда, обувь и аксессуары</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="collapse__wrapper filter__block-item">
+                      <div class="collapse__item" data-collapse-item>
+                        <div class="collapse__trigger filter__collapse-trigger" data-collapse-trigger>
+                          <span>Готовые интернет-магазины</span>
+                          <svg class="collapse__icon" data-collapse-icon>
+                            <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+                          </svg>
+                        </div>
+                        <div class="collapse__content" data-collapse-content>
+                          <div class="collapse__inner filter__collapse-inner">
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Готовые интернет-магазины</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Досуг, развлечения, хобби</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Оборудование для бизнеса</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                            <div class="filter__block-item">
+                              <label>
+                                <input type="checkbox" name="">
+                                <span>Одежда, обувь и аксессуары</span>
+                              </label>
+                              <span class="filter__count">(10)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="filter__block" data-show-wrap>
+                  <div class="filter__block-title">Цвета</div>
+                  <div class="filter__block--colors" data-show-block>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span>белый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #8A53FF">фиолетовый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #FF0000">красный</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #FF60E5">розовый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #BEF72E">зеленый</span>
+                      </label>
+                      <span class="filter__count">(5)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #222222">черный</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #D5D5E2">серый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #FFA800">оранжевый</span>
+                      </label>
+                      <span class="filter__count">(120)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #02E1FF">голубой</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #0276FF">синий</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span>белый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #8A53FF">фиолетовый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #FF0000">красный</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #FF60E5">розовый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #BEF72E">зеленый</span>
+                      </label>
+                      <span class="filter__count">(5)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #222222">черный</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #D5D5E2">серый</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #FFA800">оранжевый</span>
+                      </label>
+                      <span class="filter__count">(120)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #02E1FF">голубой</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                    <div class="filter__block-item">
+                      <label>
+                        <input type="checkbox" name="">
+                        <span style="--color: #0276FF">синий</span>
+                      </label>
+                      <span class="filter__count">(10)</span>
+                    </div>
+                  </div>
+                  <button class="link link--underline mt-20" type="button" data-show-trigger="Посмотреть все цвета">
+                    Посмотреть все цвета
+                  </button>
+                </div>
+                <button class="button button--outline centered" type="button" data-form-reset>Сбросить всё</button>
+              </aside>
+            </div>
+            <div class="columns__col--9 columns__col-laptop-min--12">
+              <div class="columns">
+                <div class="columns__col--12">
+                  <div class="filter-toolbar">
+                    <button class="filter-toolbar__btn" type="button" data-open="filter">
+                      <span class="filter-toolbar__btn-text">Фильтр</span>
+                      <svg class="filter-toolbar__btn-icon">
+                        <use xlink:href="./assets/sprite.svg#icon-filter"></use>
+                      </svg>
+                    </button>
+                    <button class="filter-toolbar__btn" type="button" data-open="sorting">
+                      <span class="filter-toolbar__btn-text">Сортировка</span>
+                      <svg class="filter-toolbar__btn-icon">
+                        <use xlink:href="./assets/sprite.svg#icon-sorting"></use>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="sorting filter--mobile-view" data-sorting>
+                    <div class="filter--mobile">
+                      <div class="filter--mobile__title">Сортировка</div>
+                      <button class="filter--mobile__btn-close" type="button" data-close="sorting">
+                        <svg>
+                          <use xlink:href="./assets/sprite.svg#icon-close"></use>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="sorting__item">
+                      <label>
+                        <input type="radio" name="range">
+                        <div>
+                          <span>По популярности</span>
+                          <svg>
+                            <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+                          </svg>
+                        </div>
+                      </label>
+                    </div>
+                    <div class="sorting__item">
+                      <label>
+                        <input type="radio" name="range">
+                        <div>
+                          <span>По цене</span>
+                          <svg>
+                            <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+                          </svg>
+                        </div>
+                      </label>
+                    </div>
+                    <div class="sorting__item">
+                      <label>
+                        <input type="radio" name="range">
+                        <div>
+                          <span>По дате публикации</span>
+                          <svg>
+                            <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+                          </svg>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--4 columns__col-laptop--6 columns__col-mob--12">
+                  <%= htmlWebpackPlugin.options.cardProdMin %>
+                </div>
+                <div class="columns__col--12 mt-30">
+                  <button class="button button--fill centered" type="button">Показать еще +10</button>
+                </div>
+                <div class="columns__col--12 mt-60 mob-hidden">
+                  <%= htmlWebpackPlugin.options.pagination %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section mb-135">
+      <div class="container">
+        <div class="section__header section__header--centered mb-50 mbm-15">
+          <h2 class="title">Заголовок для сео</h2>
+        </div>
+        <div class="editor">
+          <p>Равным образом рамки и место обучения кадров способствует подготовки и реализации систем массового участия.
+            Задача организации, в особенности же консультация с широким активом играет важную роль в формировании модели
+            развития. Таким образом сложившаяся структура организации требуют от нас анализа системы обучения кадров,
+            соответствует насущным потребностям. Повседневная практика показывает, что сложившаяся структура организации
+            требуют от нас анализа соответствующий условий активизации.</p>
+
+          <p> Равным образом рамки и место обучения кадров способствует подготовки и реализации систем массового
+            участия.
+            Задача организации, в особенности же консультация с широким активом играет важную роль в формировании модели
+            развития. Таким образом сложившаяся структура организации требуют от нас анализа системы обучения кадров,
+            соответствует насущным потребностям. Повседневная практика показывает, что сложившаяся структура организации
+            требуют от нас анализа соответствующий условий активизации.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section mb-120">
+      <div class="container">
+        <div class="section__header section__header--centered mb-60 mbm-15">
+          <h2 class="title">Вопрос-ответ</h2>
+        </div>
+        <div class="collapse answer" data-collapse data-duration="700">
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger active" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button active" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content collapse-show" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite. И
+                    ещё немного текста. Вдруг будет очень длинное название. Мы же не знаем что тут будет. Мы
+                    бы хотели, но мы не знаем. Страшно, очень страшно что тут может быть. И ещё немного текста. Вдруг
+                    будет очень длинное название. Мы же не знаем что тут будет. Мы
+                    бы хотели, но мы не знаем. Страшно, очень страшно что тут может быть. И ещё немного текста. Вдруг
+                    будет очень длинное название. Мы же не знаем что тут будет. Мы
+                    бы хотели, но мы не знаем. Страшно, очень страшно что тут может быть. И ещё немного текста. Вдруг
+                    будет очень длинное название. Мы же не знаем что тут будет. Мы
+                    бы хотели, но мы не знаем. Страшно, очень страшно что тут может быть. И ещё немного текста. Вдруг
+                    будет очень длинное название. Мы же не знаем что тут будет. Мы
+                    бы хотели, но мы не знаем. Страшно, очень страшно что тут может быть.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__wrapper answer__wrapper answer__wrapper--border">
+            <div class="collapse__item" data-collapse-item>
+              <div class="collapse__trigger answer__trigger" data-collapse-trigger>
+                <p>Могу ли я отменить свою подписку в любое время?</p>
+                <span class="answer__button" data-collapse-icon></span>
+              </div>
+              <div class="collapse__content" data-collapse-content>
+                <div class="collapse__inner answer__inner">
+                  <p>Конечно. Ваша платная подписка может быть отменена в любое время, перейдя на тарифный план Lite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%= htmlWebpackPlugin.options.sectionFooter %>
+  <%= htmlWebpackPlugin.options.temp %>
+  <button class="back-to-top" type="button" data-top>
+    <svg class="back-to-top__icon">
+      <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+    </svg>
+    <span class="back-to-top__text">Наверх</span>
+  </button>
+  <div hidden="hidden">
+    <div class="modal" id="modalCallback">
+      <button class="modal__close" type="button" data-fancybox-close>
+        <svg class="modal__close-icon">
+          <use xlink:href="./assets/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
+      <div class="modal__inner">
+        <div class="modal__title">Заказать обратный звонок</div>
+        <form class="form" action="#" data-form>
+          <div class="form__block">
+            <label>
+              <input type="text" placeholder="Имя Отчество" name="name">
+              <span>Имя Отчество</span>
+            </label>
+            <label>
+              <input type="email" placeholder="Email" name="email">
+              <span>Email</span>
+            </label>
+            <label>
+              <input type="tel" placeholder="Телефон" name="phone" data-tel>
+              <span>Телефон</span>
+            </label>
+            <label>
+              <textarea placeholder=""></textarea>
+              <span>Комментарий...</span>
+            </label>
+          </div>
+          <div class="form__block form__bottom">
+            <div class="form__agreement">
+              <label>
+                <input type="checkbox" name="agreement" data-form-agreement>
+              </label>
+              <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+                конфиденциальности</a>
+                и принимаю условия <a href="#">Пользовательского соглашения</a>
+              </div>
+            </div>
+            <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+              Отправить
+            </button>
+          </div>
+          <div class="modal__msg" data-form-success>
+            <div class="modal__msg-content">
+              <svg class="modal__msg-icon">
+                <use xlink:href="./assets/sprite.svg#icon-success"></use>
+              </svg>
+              <div class="modal__msg-text">
+                Сообщение успешно отправлено!
+              </div>
+            </div>
+
+          </div>
+          <div class="modal__msg" data-form-error>
+            <div class="modal__msg-content">
+              <svg class="modal__msg-icon">
+                <use xlink:href="./assets/sprite.svg#icon-error"></use>
+              </svg>
+              <div class="modal__msg-text">
+                Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal" id="modalRewiew">
+      <button class="modal__close" type="button" data-fancybox-close>
+        <svg class="modal__close-icon">
+          <use xlink:href="./assets/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
+      <div class="modal__inner">
+        <div class="modal__title">Оставить отзыв</div>
+        <form class="form" action="#" data-form>
+          <div class="form__block">
+            <label>
+              <input type="text" placeholder="Имя Отчество" name="name">
+              <span>Имя Отчество</span>
+            </label>
+            <label>
+              <input type="email" placeholder="Email" name="email">
+              <span>Email</span>
+            </label>
+            <label>
+              <textarea placeholder=""></textarea>
+              <span>Комментарий...</span>
+            </label>
+          </div>
+          <div class="form__block form__bottom">
+            <div class="form__agreement">
+              <label>
+                <input type="checkbox" name="agreement" data-form-agreement>
+              </label>
+              <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+                конфиденциальности</a>
+                и принимаю условия <a href="#">Пользовательского соглашения</a>
+              </div>
+            </div>
+            <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+              Отправить
+            </button>
+          </div>
+          <div class="modal__msg" data-form-success>
+            <div class="modal__msg-content">
+              <svg class="modal__msg-icon">
+                <use xlink:href="./assets/sprite.svg#icon-success"></use>
+              </svg>
+              <div class="modal__msg-text">
+                Сообщение успешно отправлено!
+              </div>
+            </div>
+
+          </div>
+          <div class="modal__msg" data-form-error>
+            <div class="modal__msg-content">
+              <svg class="modal__msg-icon">
+                <use xlink:href="./assets/sprite.svg#icon-error"></use>
+              </svg>
+              <div class="modal__msg-text">
+                Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

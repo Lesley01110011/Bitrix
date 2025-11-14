@@ -1,0 +1,62 @@
+.picture-block {
+  position: relative;
+
+  &--full {
+    @include r($mobile) {
+      height: 659px;
+      margin-left: -17px;
+      margin-right: -17px;
+      .picture-block__picture {
+        border-radius: 0;
+        height: 100%;
+      }
+    }
+  }
+
+  &__picture {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 613px;
+    border: none;
+    border-radius: 105px;
+    background-color: $color-grayLight;
+
+    @include r($mobile) {
+      width: 100%;
+      height: 454px;
+      border-radius: 30px;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      border: none;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    left: 0;
+    bottom: -29px;
+    box-shadow: 0 24px 60px 0 #2100663D;
+
+    @include r($mobile) {
+      left: initial;
+      right: 0;
+      bottom: -56px;
+    }
+  }
+
+  &__img {
+    position: absolute;
+    left: 70px;
+    bottom: -89px;
+    display: flex;
+    width: 896px;
+    height: 582px;
+  }
+}

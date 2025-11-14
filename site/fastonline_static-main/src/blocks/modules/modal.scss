@@ -1,0 +1,90 @@
+.modal {
+  padding: rem(60) rem(63);
+  border-radius: rem(15);
+  position: relative;
+  width: 100%;
+  max-width: rem(450);
+  @include r($mobile) {
+    padding: rem(20);
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(30);
+    height: rem(30);
+    position: absolute;
+    top: rem(30);
+    right: rem(30);
+    @include r($mobile) {
+      top: rem(20);
+    }
+
+    &:hover {
+      svg {
+        transform: rotate(90deg) scale(1.2);
+      }
+    }
+  }
+
+  &__close-icon {
+    width: rem(15);
+    height: rem(15);
+    will-change: transform;
+    transition: all .3s ease-in-out;
+  }
+
+  &__inner {
+  }
+
+  &__title {
+    font-size: rem(36);
+    font-weight: 600;
+    margin-bottom: rem(30);
+    @include r($mobile) {
+      font-size: rem(25);
+    }
+  }
+
+  &__msg {
+    display: none;
+    visibility: hidden;
+    border-radius: rem(15);
+
+    &.show {
+      position: absolute;
+      visibility: visible;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: rem(70) rem(40);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #FFFFFF;
+    }
+  }
+
+  &__msg-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__msg-icon {
+    width: rem(50);
+    height: rem(50);
+    fill: $color-accent;
+    margin-bottom: rem(30);
+  }
+
+  &__msg-text {
+    font-size: rem(30);
+    font-weight: 600;
+    text-align: center;
+    color: $color-dark;
+  }
+}

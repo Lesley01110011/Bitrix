@@ -1,0 +1,98 @@
+.section {
+  &__header {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+  }
+
+  &__header--centered {
+    align-items: center;
+    text-align: center;
+    @include r($tablet) {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  &__header--vert-centered {
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__header-justify {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__header-mob-column {
+    @include r($tablet) {
+      flex-direction: column;
+      gap: rem(30);
+      align-items: flex-start;
+    }
+  }
+
+  &__header--laptop-width-limit {
+    @include r($laptop) {
+      max-width: 50%;
+    }
+  }
+
+  &__has-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__icon-bg {
+    position: absolute;
+    top: -31%;
+    right: -32%;
+    width: 75%;
+    min-width: rem(1300);
+    height: 141%;
+    z-index: 0;
+  }
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    right: -21.5%;
+    z-index: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  &--color {
+    background-color: $color-grayLight;
+  }
+  &--full-height {
+    min-height: 100vh;
+  }
+
+  &--custom {
+    max-width: 1665px;
+  }
+
+  &--background {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center right;
+
+    @include r($laptop) {
+      background-position: center right -400px;
+    }
+
+    @include r($tablet) {
+      background-size: 600px;
+      background-position: right bottom 50px;
+    }
+
+    @include r($mobile) {
+      background-position: right -133px bottom 50px;
+    }
+  }
+}

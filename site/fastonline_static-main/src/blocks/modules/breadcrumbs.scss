@@ -1,0 +1,30 @@
+.breadcrumbs {
+  display: flex;
+  position: relative;
+  gap: rem(23);
+  font-size: rem(14);
+
+
+  &__link {
+    position: relative;
+    display: block;
+    color: #B287FD;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: rem(-15);
+      transform: translateY(-50%);
+      width: rem(5);
+      height: rem(8);
+      background: url("../assets/images/icon-breadcrumbs.svg") center no-repeat;
+    }
+  }
+
+  &__curr-page {
+    color: #9690A4;
+  }
+}

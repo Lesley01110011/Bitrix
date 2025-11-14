@@ -1,0 +1,80 @@
+.card-srv-detail {
+  display: block;
+  padding: rem(30);
+  border-radius: rem(20);
+  border: 1px solid #D5D5E2;
+  @include r($mobile) {
+    padding: rem(20);
+  }
+
+  &__header {
+    font-size: rem(20);
+    font-weight: 700;
+    margin-bottom: rem(20);
+    @include r($mobile) {
+      font-size: rem(18);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+    margin-bottom: rem(20);
+  }
+
+  &__content-item {
+    display: flex;
+    justify-content: space-between;
+    gap: rem(20);
+    @include r($mobile) {
+      gap: rem(10);
+    }
+  }
+
+  &__content-text,
+  &__content-text-min {
+    display: flex;
+    @include r($mobile) {
+      font-size: rem(14);
+    }
+  }
+
+  &__content-text {
+    flex: 1 1 60%;
+  }
+
+
+  &__content-text-min {
+    flex: 1 1 40%;
+    color: #777A7A;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  &__price {
+    font-size: rem(24);
+    font-weight: 600;
+    @include r($mobile) {
+      font-size: rem(20);
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: rem(15);
+    @include r($tablet) {
+      column-gap: rem(30);
+      row-gap: rem(20);
+    }
+  }
+
+  &__button {
+    @include r($mobile) {
+      flex: 1 1 100%;
+    }
+  }
+}

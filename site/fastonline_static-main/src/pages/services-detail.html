@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <%= htmlWebpackPlugin.options.head %>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body class="body">
+<div class="main-container">
+  <%= htmlWebpackPlugin.options.sectionHeader %>
+  <main class="main">
+    <section class="section mt-30 mb-30 mtm-15 mbm-20">
+      <div class="container">
+        <%= htmlWebpackPlugin.options.breadcrumbs %>
+      </div>
+    </section>
+    <section class="section mb-60 mbm-30">
+      <div class="container">
+        <div class="section__header mb-60 mbm-20">
+          <h1 class="title">Разработка баннера</h1>
+        </div>
+        <div class="srv-block-detail">
+          <div class="columns">
+            <div class="columns__col--8 columns__col-laptop-min--12">
+              <picture class="srv-block-detail__picture" data-fancybox data-src="./assets/images/img-news-2.jpg">
+                <img src="./assets/images/img-news-2.jpg" alt="">
+              </picture>
+              <div class="srv-block-detail__block-text">
+                <div class="srv-block-detail__block-hide" data-show-wrap>
+                  <div class="srv-block-detail__block-hide-content" data-show-block>
+                    <p>Имеется спорная точка зрения, гласящая примерно следующее: сделанные на базе интернет-аналитики
+                      выводы неоднозначны и будут ограничены исключительно образом мышления. Учитывая ключевые сценарии
+                      поведения, сложившаяся структура организации способствует подготовке и реализации позиций,
+                      занимаемых участниками в отношении поставленных задач! Принимая во внимание показатели успешности,
+                      сплочённость команды профессионалов создаёт предпосылки для инновационных методов управления
+                      процессами.</p>
+                  </div>
+                  <button class="link srv-block-detail__block-hide-btn" type="button" data-show-trigger="Развернуть">
+                    Развернуть
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="columns__col--4 columns__col-laptop-min--12">
+              <h3 class="title title--extra-small mb-20">Выберите услугу</h3>
+              <div class="srv-block-detail__sidebar">
+                <div class="card-srv-detail">
+                  <div class="card-srv-detail__header">Дизайн малых баннеров (3 шт.)</div>
+                  <div class="card-srv-detail__content">
+                    <div class="card-srv-detail__content-item">
+                      <p class="card-srv-detail__content-text">Количество правок на финальный вариант</p>
+                      <p class="card-srv-detail__content-text-min">не более 3</p>
+                    </div>
+                    <div class="card-srv-detail__content-item">
+                      <p class="card-srv-detail__content-text">Размер баннера</p>
+                      <p class="card-srv-detail__content-text-min">до 300 &#8727; 300 px</p>
+                    </div>
+                  </div>
+                  <div class="card-srv-detail__bottom">
+                    <div class="card-srv-detail__price">3000 ₽</div>
+                    <button class="button button--fill-second button--hover-transl card-srv-detail__button"
+                            type="button" data-add-to-cart>
+                      <span>Заказать</span>
+                      <svg>
+                        <use xlink:href="./assets/sprite.svg#icon-cart"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-srv-detail">
+                  <div class="card-srv-detail__header">Дизайн малых баннеров (3 шт.)</div>
+                  <div class="card-srv-detail__content">
+                    <div class="card-srv-detail__content-item">
+                      <p class="card-srv-detail__content-text">Количество правок на финальный вариант</p>
+                      <p class="card-srv-detail__content-text-min">не более 3</p>
+                    </div>
+                  </div>
+                  <div class="card-srv-detail__bottom">
+                    <div class="card-srv-detail__price">2000 ₽</div>
+                    <button class="button button--fill-second button--hover-transl card-srv-detail__button"
+                            type="button" data-add-to-cart>
+                      <span>Заказать</span>
+                      <svg>
+                        <use xlink:href="./assets/sprite.svg#icon-cart"></use>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section section--color pt-110 pb-100 ptm-30 pbm-30">
+      <div class="container">
+        <div class="section__header section__header-justify mb-60 mbm-20">
+          <h2 class="title">Другие услуги</h2>
+          <a class="button button--fill tab-hidden" href="#">Смотреть все услуги</a>
+        </div>
+        <div class="columns">
+          <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+            <%= htmlWebpackPlugin.options.cardSrv %>
+          </div>
+          <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+            <%= htmlWebpackPlugin.options.cardSrv %>
+          </div>
+          <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+            <%= htmlWebpackPlugin.options.cardSrv %>
+          </div>
+          <div class="columns__col--12 tab-visible">
+            <a class="button button--fill button--mob-wide centered" href="#">Смотреть все услуги</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%= htmlWebpackPlugin.options.sectionFooter %>
+  <%= htmlWebpackPlugin.options.temp %>
+</div>
+</body>
+</html>

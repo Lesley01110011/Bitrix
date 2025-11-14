@@ -1,0 +1,19 @@
+.prod-detail-tabs {
+  width: 100%;
+  &__controls {
+    padding: rem(15) rem(25);
+    background-color: $color-grayLight;
+    border-radius: rem(10);
+    gap: rem(62);
+  }
+  &__trigger {
+    font-size: rem(20);
+    font-weight: 700;
+    @include r($mobile) {
+      font-size: rem(16);
+    }
+  }
+  &__inner {
+    padding: rem(30) rem(25) 0;
+  }
+}

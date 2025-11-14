@@ -1,0 +1,57 @@
+.srv-block-detail {
+  &__picture {
+    border-radius: rem(20);
+    height: rem(600);
+    overflow: hidden;
+    margin-bottom: rem(30);
+    cursor: pointer;
+    @include r($tablet) {
+      height: rem(400);
+    }
+    @include r($mobile) {
+      margin-bottom: rem(15);
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__block-text {
+  }
+
+  &__block-hide {
+
+  }
+
+  &__block-hide-content {
+    transition: all .3s ease-in-out;
+    @include r($tablet) {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      line-clamp: 4;
+      -webkit-line-clamp: 4;
+      overflow: hidden;
+    }
+  }
+
+  &__block-hide-btn {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+    @include r($tablet) {
+      display: inline-block;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+    @include r($mobile) {
+      gap: rem(15);
+    }
+  }
+}

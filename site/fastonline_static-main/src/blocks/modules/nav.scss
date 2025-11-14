@@ -1,0 +1,28 @@
+.nav {
+  width: 100%;
+
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+  }
+
+  &__link--accent {
+    @include rmin($tablet) {
+      font-size: rem(18);
+      font-weight: 600;
+      color: $color-accent;
+    }
+  }
+
+  &__link-icon {
+  }
+
+}

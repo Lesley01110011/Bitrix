@@ -1,0 +1,23 @@
+.decor-picture-guide {
+  position: absolute;
+  object-fit: none;
+  right: -22%;
+  pointer-events: none;
+
+  @include r($tablet) {
+    top: 11%;
+    width: auto;
+    height: 480px;
+    left: 0;
+    right: initial;
+    object-fit: contain;
+    z-index: 0;
+  }
+
+  @include r($mobile) {
+    top: 100px;
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+  }
+}

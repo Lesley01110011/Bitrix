@@ -1,0 +1,15 @@
+.card {
+  &__text-bold {
+    font-family: $font-accent;
+    font-size: calc(20px + 4 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 600;
+    margin-bottom: rem(10);
+    @include rmin(1920) {
+      font-size: rem(24);
+    }
+  }
+
+  &__text {
+
+  }
+}

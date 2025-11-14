@@ -1,0 +1,21 @@
+.prod-detail-header {
+  padding-bottom: rem(20);
+  margin-bottom: rem(40);
+  border-bottom: 1px solid rgba(162, 162, 191, 0.3);
+  @include r($mobile) {
+    margin-bottom: rem(15);
+    border-bottom: none;
+    padding: 0;
+  }
+
+  &__block {
+    display: flex;
+    align-items: center;
+    gap: rem(30);
+    @include r($tablet) {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      row-gap: rem(15);
+    }
+  }
+}

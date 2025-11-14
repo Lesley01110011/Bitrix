@@ -1,0 +1,189 @@
+.filter {
+  display: block;
+  padding: rem(25) 0;
+  background-color: #FFFFFF;
+  border-radius: rem(20);
+  @include r($laptop-min) {
+    border-radius: rem(20) rem(20) 0 0;
+    padding-top: 0;
+  }
+
+  &__block {
+    padding: 0 rem(25) rem(40);
+    border-bottom: 1px dashed #D2D2E0;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    & + & {
+      padding-top: rem(40);
+    }
+  }
+
+  &__block--colors {
+    position: relative;
+    height: rem(350);
+    overflow: hidden;
+    transition: height 1s ease-in-out;
+
+    label {
+      span {
+        position: relative;
+        padding-left: rem(40);
+        overflow: visible;
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: block;
+          background-color: var(--color);
+          width: rem(21);
+          height: rem(21);
+          border-radius: 50%;
+          border: 1px solid #D5D5E2;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+
+  &__block-title {
+    font-size: rem(20);
+    font-family: $font-accent;
+    font-weight: 600;
+    margin-bottom: rem(20);
+  }
+
+  &__block-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(10);
+    transition: all .3s ease-in-out;
+
+    &:hover > label {
+      color: $color-accent;
+    }
+
+    label {
+      max-width: 75%;
+      height: rem(25);
+      margin-right: rem(5);
+    }
+
+    span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+
+    svg {
+      width: rem(7.5);
+      height: rem(13.5);
+      fill: $color-accent;
+      margin-left: auto;
+    }
+  }
+
+  &__count {
+    color: #A2A2BF;
+  }
+
+  &__collapse-trigger {
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  &__collapse-inner {
+    margin-top: rem(15);
+  }
+
+  &--mobile {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #FFFFFF;
+    padding-top: rem(25);
+    border-bottom: 1px solid #D2D2E0;
+    margin-bottom: rem(25);
+    @include rmin($laptop-min) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  &--mobile__title {
+    color: $color-accent;
+    font-size: rem(20);
+    font-family: $font-accent;
+    padding-bottom: rem(27);
+    text-align: center;
+  }
+
+  &--mobile__btn-close {
+    display: none;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    @include r($laptop-min) {
+      visibility: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: rem(20);
+      right: rem(25);
+      width: rem(30);
+      height: rem(30);
+
+      svg {
+        width: rem(16);
+        height: rem(16);
+      }
+    }
+  }
+
+  &--mobile-view {
+    @include r($laptop-min) {
+      max-height: 0;
+      height: 0;
+      overflow: hidden;
+      bottom: -100%;
+      position: fixed;
+      width: 90%;
+      left: 50%;
+      overflow-y: scroll;
+      transform: translateX(-50%);
+      transition: height, bottom .3s ease-in-out;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        width: 0;
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+    }
+    @include r($mobile) {
+      width: 100%;
+    }
+
+  }
+
+  &--open {
+    position: fixed;
+    visibility: visible;
+    z-index: 300;
+    max-height: 90%;
+    min-height: rem(280);
+    bottom: 0;
+  }
+}

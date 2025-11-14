@@ -1,0 +1,17 @@
+.prod-detail-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: rem(595);
+  border-radius: rem(20);
+  overflow: hidden;
+  @include r($tablet) {
+    height: rem(400);
+  }
+  @include r($mobileSmall) {
+    height: rem(220);
+  }
+  img {
+    object-fit: cover;
+  }
+}

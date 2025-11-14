@@ -1,0 +1,41 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: rem(8.5);
+  width: fit-content;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(32);
+    height: rem(32);
+    border-radius: rem(8);
+    font-size: rem(14);
+    outline: 1px solid transparent;
+    transition: all .3s ease-in-out;
+
+    &.active {
+      background-color: $color-accent;
+      color: #FFFFFF;
+    }
+    &:hover {
+      box-shadow: 5px 5px 10px 0 rgba(65, 78, 124, 0.15);
+    }
+  }
+
+  &__btn {
+    svg {
+      width: rem(7.5);
+      height: rem(13.5);
+      fill: $color-dark;
+    }
+  }
+
+  &__btn-prev {
+    svg {
+      transform: rotate(180deg);
+      transform-origin: center;
+    }
+  }
+}

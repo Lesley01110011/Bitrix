@@ -1,0 +1,44 @@
+.card-review {
+  display: flex;
+  align-items: flex-start;
+  gap: rem(20);
+  padding: rem(35);
+  border-radius: rem(20);
+  background-color: $color-grayLight;
+  @include r($mobile) {
+    padding: rem(20);
+  }
+
+  &__picture {
+    flex-shrink: 0;
+    width: rem(60);
+    height: rem(60);
+    border-radius: 50%;
+    overflow: hidden;
+    @include r($mobile) {
+      width: rem(40);
+      height: rem(40);
+    }
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+  }
+
+  &__text-bold {
+    font-size: rem(20);
+    font-weight: 600;
+    margin-bottom: rem(10);
+    @include r($mobile) {
+      font-size: rem(16);
+    }
+  }
+
+  &__text {
+    font-size: rem(14);
+    white-space: initial;
+  }
+}

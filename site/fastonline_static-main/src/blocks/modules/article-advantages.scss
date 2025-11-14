@@ -1,0 +1,50 @@
+.article-advantages {
+  position: relative;
+  border-radius: 30px;
+  background-color: #FBFBFB;
+
+  &__title {
+    margin-bottom: 18px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 24px;
+    list-style: disc;
+  }
+
+  &__item {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19.2px;
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    display: flex;
+    width: 56%;
+    height: auto;
+    object-fit: contain;
+
+    @include r($tablet) {
+      top: initial;
+      bottom: -12%;
+      width: 327px;
+      right: initial;
+      left: 0;
+      object-fit: contain;
+    }
+
+    &--second {
+      top: -15%;
+
+      @include r($tablet) {
+        top: initial;
+        bottom: -15%;
+      }
+    }
+  }
+}

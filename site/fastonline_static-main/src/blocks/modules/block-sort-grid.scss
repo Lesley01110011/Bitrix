@@ -1,0 +1,33 @@
+.block-sort-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: rem(30);
+  grid-auto-flow: dense;
+  @include r($laptop-min) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include r($mobile) {
+    grid-template-columns: 1fr;
+    gap: rem(15);
+  }
+
+  &__item {
+    will-change: transform;
+    transition: all .3s ease-in-out;
+  }
+
+  &__item.hidden {
+    overflow: hidden;
+    transform-origin: left top;
+    animation-name: hide;
+    animation-duration: .3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    @include r($mobile) {
+      animation: none;
+      display: none;
+      visibility: hidden;
+    }
+  }
+}

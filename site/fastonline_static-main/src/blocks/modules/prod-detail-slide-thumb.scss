@@ -1,0 +1,12 @@
+.prod-detail-slide-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: rem(10);
+  overflow: hidden;
+  height: rem(135);
+  cursor: pointer;
+  img {
+    object-fit: cover;
+  }
+}

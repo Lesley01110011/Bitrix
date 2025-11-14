@@ -1,0 +1,9 @@
+.local-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @include r($mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+}

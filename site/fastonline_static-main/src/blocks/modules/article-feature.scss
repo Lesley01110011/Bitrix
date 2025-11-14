@@ -1,0 +1,50 @@
+.article-feature {
+  display: flex;
+  flex-direction: column;
+  gap: 73px;
+  padding: 40px 0 36px;
+  border-top: 2px solid $color-grayLight;
+
+  @include r($mobile) {
+    gap: 23px;
+    padding: 14px 0;
+  }
+
+  &:nth-child(odd) {
+    border-right: 2px solid $color-grayLight;
+    @include r($mobile) {
+      border-right: 0;
+    }
+  }
+
+  &:nth-child(even) {
+    padding-left: 30px;
+    @include r($mobile) {
+      padding-left: 0;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    width: 70px;
+    height: 70px;
+
+    @include r($mobile) {
+      width: 43px;
+      height: 43px;
+    }
+  }
+
+  &__text {
+    font-family: $font-main;
+    font-size: calc(18px + 4 * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 500;
+    line-height: 25.2px;
+    text-align: left;
+
+    @include r($mobile) {
+      font-size: 16px;
+      line-height: 22.4px;
+    }
+  }
+}

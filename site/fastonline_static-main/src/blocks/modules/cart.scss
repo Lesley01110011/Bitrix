@@ -1,0 +1,22 @@
+.cart {
+  position: relative;
+
+  &__count {
+    position: absolute;
+    top: 0;
+    right: rem(-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(18);
+    height: rem(18);
+    border-radius: 50%;
+    background-color: $color-accent;
+    color: #FFFFFF;
+    font-size: rem(10);
+    @include r($mobile) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}

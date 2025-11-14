@@ -1,0 +1,13 @@
+.text {
+  font-family: $font-main;
+  font-size: calc(18px + 4 * ((100vw - 320px) / (1920 - 320)));
+  font-weight: 500;
+
+  @include rmin(1920) {
+    font-size: rem(24);
+  }
+
+  &__accent {
+    color: $color-accent;
+  }
+}

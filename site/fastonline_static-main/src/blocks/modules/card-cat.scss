@@ -1,0 +1,89 @@
+.card-cat {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: rem(350);
+  @include r($mobileSmall) {
+    height: rem(370);
+  }
+
+
+  &__inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: rem(47) rem(57);
+    background-color: #FFFFFF;
+    border-radius: rem(20);
+    transition: all .3s ease-in-out;
+
+    &:hover {
+      box-shadow: 20px 20px 50px 0 rgba(65, 78, 124, 0.15);
+    }
+
+    @include r($laptop) {
+      padding: rem(30);
+    }
+    @include r($tablet) {
+      padding: rem(20);
+    }
+
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: rem(20);
+    margin-bottom: rem(10);
+  }
+
+  &__header-count {
+    font-size: rem(20);
+    color: $color-accent;
+  }
+
+  &__body {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: rem(133);
+    background-color: #FFFFFF;
+    transition: all .5s ease-in-out;
+    @include r($tablet) {
+      height: rem(210);
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(5);
+
+    li {
+      width: 100%;
+    }
+  }
+
+  &__list-count {
+    color: #A2A2BF;
+  }
+
+  &__list-link {
+    display: flex;
+    align-items: flex-start;
+    gap: rem(20);
+    width: 100%;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+      span {
+        color: $color-accent;
+      }
+    }
+  }
+
+
+}

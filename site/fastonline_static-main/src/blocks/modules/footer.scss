@@ -1,0 +1,205 @@
+.footer {
+  display: block;
+  position: relative;
+  bottom: 0;
+  margin-top: auto;
+  padding: rem(40) 0;
+  width: 100%;
+  overflow: hidden;
+  background-color: #1B0029;
+  color: #FFFFFF;
+
+  @include r($mobile) {
+    padding: rem(50) 0;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: rem(57);
+    padding: 0 0 rem(20);
+    border-bottom: 1px solid #4E4652;
+    @include r($laptop) {
+      flex-wrap: wrap;
+    }
+    @include r($mobile) {
+      flex-direction: column;
+      gap: rem(40);
+      justify-content: center;
+      border-bottom: none;
+      padding: 0 0 rem(10);
+    }
+  }
+
+  &__top-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: rem(20);
+  }
+
+  &__top-button {
+    font-size: rem(20);
+    min-width: rem(270);
+    height: rem(50);
+    white-space: nowrap;
+    @include r($laptop) {
+      order: 2;
+    }
+    @include r($mobile) {
+      order: initial;
+      font-size: rem(14);
+    }
+  }
+
+  &__logo {
+
+  }
+
+  &__nav {
+    color: #FFFFFF;
+    @include r($laptop) {
+      order: 3;
+    }
+    @include r($mobile) {
+      order: initial;
+    }
+  }
+
+  &__nav-list {
+    font-size: rem(18);
+    @include r($mobile) {
+      flex-direction: column;
+    }
+
+    li {
+      @include r($mobile) {
+        padding: rem(7) 0;
+        font-size: rem(16);
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(30) 0 0;
+    margin-bottom: rem(30);
+    @include r($tablet) {
+      justify-content: normal;
+      gap: rem(80);
+    }
+    @include r($mobile) {
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+      gap: rem(40);
+      margin-bottom: rem(40);
+    }
+  }
+
+  &__bottom-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include r($tablet) {
+      flex-direction: column;
+      gap: rem(23);
+    }
+    @include r($mobile) {
+      align-items: center;
+    }
+  }
+
+  &__copyright {
+    margin-right: rem(65);
+    @include r($mobile) {
+      margin: 0;
+    }
+  }
+
+  &__pay-block {
+    display: flex;
+    align-items: center;
+    gap: rem(30);
+    margin-left: rem(75);
+    @include r($tablet) {
+      margin-left: 0;
+    }
+  }
+
+  &__pay-block-link {
+    display: block;
+
+    svg {
+      width: rem(50);
+      max-height: rem(50);
+    }
+  }
+
+  &__contacts {
+    display: flex;
+    align-items: center;
+    gap: rem(64);
+    margin-left: auto;
+    @include r($tablet) {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-left: 0;
+      gap: rem(23);
+    }
+    @include r($mobile) {
+      align-items: center;
+    }
+  }
+
+  &__contacts-item {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    @include r($mobile) {
+      text-align: center;
+
+    }
+  }
+
+  &__contacts-text-bold {
+    font-size: rem(24);
+    font-weight: 700;
+  }
+
+  &__contacts-text {
+    color: #A2A2BF;
+  }
+
+  &__contacts-text--accent {
+    color: $color-second;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 2px;
+  }
+
+  &__info {
+    display: flex;
+    gap: rem(36);
+    @include r($mobile) {
+      flex-direction: column;
+      align-items: center;
+      gap: rem(25);
+    }
+  }
+
+  &__info-link {
+    font-size: rem(14);
+    color: #A2A2BF;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
+}

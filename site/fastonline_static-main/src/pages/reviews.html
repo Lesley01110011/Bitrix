@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <%= htmlWebpackPlugin.options.head %>
+  <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body class="body">
+<div class="main-container">
+  <%= htmlWebpackPlugin.options.sectionHeader %>
+  <main class="main">
+    <section class="section mt-30 mb-30 mtm-15 mbm-20">
+      <div class="container">
+        <%= htmlWebpackPlugin.options.breadcrumbs %>
+      </div>
+    </section>
+    <section class="section mb-160 mbm-30">
+      <div class="container">
+        <div class="section__header mb-55 mbm-20">
+          <h1 class="title">Отзывы</h1>
+        </div>
+        <div class="columns">
+          <div class="columns__col--9 columns__col-laptop-min--12 order-laptop-min--2">
+            <div class="reviews mb-60 mbm-20">
+              <%= htmlWebpackPlugin.options.cardReview %>
+              <%= htmlWebpackPlugin.options.cardReview %>
+              <%= htmlWebpackPlugin.options.cardReview %>
+              <%= htmlWebpackPlugin.options.cardReview %>
+              <%= htmlWebpackPlugin.options.cardReview %>
+              <%= htmlWebpackPlugin.options.cardReview %>
+              <%= htmlWebpackPlugin.options.cardReview %>
+            </div>
+            <div class="tab-hidden">
+              <%= htmlWebpackPlugin.options.pagination %>
+            </div>
+            <div class="tab-visible">
+              <button class="button button--fill centered">Показать еще +10</button>
+            </div>
+          </div>
+          <div class="columns__col--3 columns__col-laptop-min--12 order-laptop-min--1">
+            <div class="review-sticky-card">
+              <div class="review-sticky-card__text">Нам важно ваше мнение! Оставьте отзыв!</div>
+              <button class="button order-laptop button--fill review-sticky-card__button" type="button" data-fancybox
+                      data-src="#modalRewiew">Оставить отзыв
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <%= htmlWebpackPlugin.options.sectionFooter %>
+  <%= htmlWebpackPlugin.options.temp %>
+</div>
+</body>
+</html>

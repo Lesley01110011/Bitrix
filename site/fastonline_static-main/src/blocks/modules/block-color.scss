@@ -1,0 +1,90 @@
+.block-color {
+  display: block;
+  width: 100%;
+  padding: rem(90.5) rem(85) rem(58);
+  border-radius: rem(30);
+  background-color: $color-grayLight;
+  overflow: hidden;
+  @include r($mobile) {
+    padding: rem(45) rem(25) rem(92);
+  }
+
+  &:hover {
+    .block-color__badge:before,
+    .block-color__badge:after {
+      animation-name: item-scale;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 5;
+    @include r($mobile) {
+      max-width: 80%;
+    }
+    @include r($mobileSmall) {
+      max-width: none;
+    }
+  }
+  &__title {
+    font-size: rem(70);
+  }
+
+  &__icon-bg {
+    position: absolute;
+    top: rem(-140);
+    left: rem(-120);
+    width: rem(151);
+    height: rem(151);
+    opacity: .5;
+    @include r($mobile) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  &__badge {
+    position: relative;
+    top: rem(13);
+    left: 2px;
+    margin: 0 rem(20) 0 auto;
+    width: fit-content;
+    @include r($mobile) {
+      top: rem(70);
+    }
+    @include r($mobileSmall) {
+      margin: 0 auto;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 65%;
+      transform: translate(-50%, -50%);
+      width: rem(595);
+      height: rem(595);
+      border-radius: 50%;
+      background-color: #E2E2FC;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 0;
+      top: 50%;
+      left: 65%;
+      transform: translate(-50%, -50%);
+      width: rem(859);
+      height: rem(859);
+      border-radius: 50%;
+      background-color: #EEEEF9;
+    }
+  }
+}

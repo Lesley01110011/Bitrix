@@ -1,0 +1,28 @@
+.decor-picture {
+  position: absolute;
+  top: -39px;
+  right: 519px;
+  width: 200px;
+  height: auto;
+  object-fit: none;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px 0 #11022E4D;
+
+  @include r($laptop) {
+    right: 122px;
+  }
+
+  @include r($tablet) {
+    width: 110px;
+    top: initial;
+    bottom: 43px;
+    right: 286px;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+
+  @include r($mobile) {
+    right: 153px;
+  }
+}

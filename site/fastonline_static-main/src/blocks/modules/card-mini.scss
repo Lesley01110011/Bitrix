@@ -1,0 +1,87 @@
+.card-mini {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: rem(300);
+  @include r($mobile) {
+    max-width: 90vw;
+  }
+
+  &__count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: rem(60);
+    height: rem(60);
+    border-radius: 50%;
+    background-color: $color-grayLight;
+    margin-bottom: rem(13);
+    font-size: rem(30);
+    font-weight: 600;
+    color: $color-accent;
+    @include r($mobile) {
+      width: rem(40);
+      height: rem(40);
+      font-size: rem(16);
+    }
+  }
+  &--centered {
+    max-width: rem(315);
+    align-items: center;
+    text-align: center;
+    @include r($mobile) {
+      flex-direction: row;
+      text-align: left;
+      gap: rem(15);
+    }
+  }
+
+  &--arrow {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: rem(25);
+      right: rem(-36);
+      width: rem(24);
+      height: rem(24);
+      background: url("../assets/images/icon-arrow-min.svg") no-repeat, center, 100%;
+      @include r($tablet) {
+        content: none;
+      }
+    }
+
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(60);
+    height: rem(60);
+    padding: 5px;
+    border-radius: rem(20);
+    background-color: #FFFFFF;
+    margin-bottom: rem(20);
+    transform: rotate(var(--rotate));
+    @include r($mobile) {
+      margin-bottom: rem(10);
+      width: rem(50);
+      height: rem(50);
+      border-radius: rem(15);
+      transform: none;
+    }
+
+    svg {
+      width: rem(30);
+      height: rem(30);
+      fill: $color-accent;
+      @include r($mobile) {
+        width: rem(25);
+        height: rem(25);
+      }
+    }
+  }
+}

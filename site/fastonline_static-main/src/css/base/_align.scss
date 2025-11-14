@@ -1,0 +1,94 @@
+.align-self-center {
+  align-self: center;
+}
+.align-self-end {
+  align-self: flex-end;
+}
+.align-self-start {
+  align-self: flex-start;
+}
+
+
+
+.align-items-center {
+  align-items: center;
+}
+.align-items-end {
+  align-items: flex-end;
+}
+.align-items-start {
+  align-items: flex-start;
+}
+.align-items-base {
+  align-items: baseline;
+}
+
+
+.align-content-center {
+  align-content: center;
+}
+.align-content-end {
+  align-content: flex-end;
+}
+.align-content-start {
+  align-content: start;
+}
+
+
+
+.text-center {
+  text-align: center;
+}
+
+.mob-ai-start {
+  @include r($mobile) {
+    align-items: flex-start;
+  }
+}
+.mob-ai-end {
+  @include r($mobile) {
+    align-items: flex-end;
+  }
+}.mob-ai-base {
+   @include r($mobile) {
+     align-items: baseline;
+   }
+ }
+.mob-ai-center {
+  @include r($mobile) {
+    align-items: center;
+  }
+}
+
+.mob-ac-center {
+  @include r($mobile) {
+    align-content: center;
+  }
+}
+.mob-ac-start {
+  @include r($mobile) {
+    align-content: flex-start;
+  }
+}
+.mob-ac-end {
+  @include r($mobile) {
+    align-content: flex-end;
+  }
+}
+
+.mob-as-center {
+  @include r($mobile) {
+    align-self: center;
+  }
+}
+.mob-as-start {
+  @include r($mobile) {
+    align-self: flex-start;
+  }
+}
+.mob-as-end {
+  @include r($mobile) {
+    align-self: flex-end;
+  }
+}
+
