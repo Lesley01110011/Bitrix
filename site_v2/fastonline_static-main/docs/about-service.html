@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!DOCTYPE html>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="194x194" href="./assets/favicon/favicon-194x194.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="./assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <title>О сервисе</title>
+<link href="./css/main.css" rel="stylesheet"></head>
+<body class="body">
+<div class="main-container">
+    <script>
+// Поиск в header - выполняется с максимальным приоритетом
+(function() {
+  'use strict';
+  
+  console.log('=== ПОИСК: Загрузка скрипта ===');
+  
+  var data = [
+    {t:'Готовые интернет-магазины на Bitrix',u:'./catalog.html',c:'Каталог'},
+    {t:'Разработка корпоративных сайтов',u:'./services.html',c:'Услуги'},
+    {t:'Новые шаблоны для интернет-магазинов',u:'./catalog.html',c:'Новинки'},
+    {t:'Скидки на услуги разработки',u:'./catalog.html',c:'Акции'},
+    {t:'Интеграция Bitrix24 с внешними системами',u:'./services.html',c:'Битрикс'},
+    {t:'Отзывы клиентов о наших услугах',u:'./reviews.html',c:'Отзывы'},
+    {t:'Портфолио выполненных проектов',u:'./about-service.html',c:'Портфолио'},
+    {t:'Часто задаваемые вопросы',u:'./faq.html',c:'Вопрос-ответ'}
+  ];
+  
+  function search(query) {
+    if (!query || !query.trim()) return [];
+    var q = query.trim().toLowerCase();
+    return data.filter(function(i) {
+      return i.t.toLowerCase().indexOf(q) !== -1 || i.c.toLowerCase().indexOf(q) !== -1;
+    });
+  }
+  
+  window.doSearch = function(type) {
+    console.log('doSearch вызван, тип:', type);
+    var id = type === 'desktop' ? 'search-desktop' : 'search-mobile';
+    var input = document.getElementById(id);
+    if (!input) {
+      console.error('Поле не найдено:', id);
+      return false;
+    }
+    var q = input.value.trim();
+    console.log('Запрос:', q);
+    if (!q) {
+      return false;
+    }
+    var r = search(q);
+    console.log('Найдено результатов:', r.length);
+    if (r.length > 0) {
+      var url = r[0].u + '?q=' + encodeURIComponent(q);
+      console.log('Переход на:', url);
+      window.location.href = url;
+    } else {
+      // Скрываем выпадающий список, если ничего не найдено
+      var container = document.getElementById('search-results-' + type);
+      if (container) {
+        container.classList.remove('active');
+        container.innerHTML = '';
+      }
+    }
+    return false;
+  };
+  
+  window.showAutocomplete = function(type) {
+    var id = type === 'desktop' ? 'search-desktop' : 'search-mobile';
+    var input = document.getElementById(id);
+    var container = document.getElementById('search-results-' + type);
+    if (!input || !container) return;
+    var q = input.value.trim();
+    if (q.length < 2) {
+      container.classList.remove('active');
+      container.innerHTML = '';
+      return;
+    }
+    var r = search(q);
+    if (r.length === 0) {
+      // Скрываем выпадающий список, если ничего не найдено
+      container.classList.remove('active');
+      container.innerHTML = '';
+      return;
+    }
+    var h = r.map(function(item) {
+      return '<a href="' + item.u + '?q=' + encodeURIComponent(q) + '" class="search__results-item">' +
+             '<div class="search__results-item-title">' + item.t + '</div>' +
+             '<div class="search__results-item-category">' + item.c + '</div></a>';
+    }).join('');
+    container.innerHTML = h;
+    container.classList.add('active');
+  };
+  
+  function init() {
+    console.log('=== ПОИСК: Инициализация ===');
+    
+    var df = document.querySelector('.header__search.mob-hidden form');
+    var di = document.getElementById('search-desktop');
+    var db = df ? df.querySelector('button[type="submit"]') : null;
+    
+    var mf = document.querySelector('.header__search.only-mobile form');
+    var mi = document.getElementById('search-mobile');
+    var mb = mf ? mf.querySelector('button[type="submit"]') : null;
+    
+    console.log('Desktop form:', df, 'input:', di, 'button:', db);
+    console.log('Mobile form:', mf, 'input:', mi, 'button:', mb);
+    
+    if (df && di) {
+      // Используем capture phase для максимального приоритета
+      df.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log('Desktop FORM SUBMIT');
+        return doSearch('desktop');
+      }, true);
+      
+      if (db) {
+        db.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Desktop BUTTON CLICK');
+          return doSearch('desktop');
+        }, true);
+      }
+      
+      di.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Desktop ENTER');
+          return doSearch('desktop');
+        }
+      }, true);
+      
+      di.addEventListener('input', function() {
+        console.log('Desktop INPUT');
+        showAutocomplete('desktop');
+      });
+    }
+    
+    if (mf && mi) {
+      mf.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log('Mobile FORM SUBMIT');
+        doSearch('mobile');
+        var btn = document.querySelector("[data-search-button-mobile]");
+        var field = document.querySelector("[data-search-field-mobile]");
+        if (btn && field) {
+          field.classList.remove("active");
+          btn.classList.remove("active");
+          setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+        }
+        return false;
+      }, true);
+      
+      if (mb) {
+        mb.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Mobile BUTTON CLICK');
+          doSearch('mobile');
+          var btn = document.querySelector("[data-search-button-mobile]");
+          var field = document.querySelector("[data-search-field-mobile]");
+          if (btn && field) {
+            field.classList.remove("active");
+            btn.classList.remove("active");
+            setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+          }
+          return false;
+        }, true);
+      }
+      
+      mi.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Mobile ENTER');
+          doSearch('mobile');
+          var btn = document.querySelector("[data-search-button-mobile]");
+          var field = document.querySelector("[data-search-field-mobile]");
+          if (btn && field) {
+            field.classList.remove("active");
+            btn.classList.remove("active");
+            setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+          }
+          return false;
+        }
+      }, true);
+      
+      mi.addEventListener('input', function() {
+        console.log('Mobile INPUT');
+        showAutocomplete('mobile');
+      });
+    }
+    
+    console.log('=== ПОИСК: Инициализация завершена ===');
+  }
+  
+  // Запуск с максимальным приоритетом
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, true);
+  } else {
+    init();
+  }
+  
+  // Дополнительные попытки инициализации
+  setTimeout(init, 50);
+  setTimeout(init, 100);
+  setTimeout(init, 300);
+  setTimeout(init, 500);
+  setTimeout(init, 1000);
+  
+  console.log('=== ПОИСК: Скрипт загружен ===');
+})();
+</script>
+<header class="header">
+  <div class="container">
+    <div class="header__block header__top">
+      <a class="logo header__logo" href="/www/fastonline_static-main/docs/index.html">
+        <img src="./assets/images/logo-fast-online.svg" alt="FASTonline">
+      </a>
+      <div class="search header__search mob-hidden">
+        <form action="#" role="search" aria-label="Поиск по сайту">
+          <div class="search__wrapper">
+            <input 
+              type="search" 
+              id="search-desktop" 
+              name="search" 
+              placeholder="Поиск по сайту..." 
+              aria-label="Поле поиска" 
+              autocomplete="off"
+            >
+            <button class="search__button" type="submit" aria-label="Найти">
+              <svg class="search__button-icon" aria-hidden="true">
+                <use xlink:href="./assets/sprite.svg#icon-search"></use>
+              </svg>
+            </button>
+            <div class="search__results" id="search-results-desktop" role="listbox" aria-label="Результаты поиска"></div>
+          </div>
+        </form>
+      </div>
+      <div class="header__callback">
+        <div class="header__callback-link">
+          <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+          <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+        </div>
+      </div>
+      <div class="header__toolbar">
+        <a class="header__toolbar-link" href="#" aria-label="Избранное">
+          <svg class="header__toolbar-icon" aria-hidden="true">
+            <use xlink:href="./assets/sprite.svg#icon-fav"></use>
+          </svg>
+        </a>
+        <div class="search header__search only-mobile">
+          <form action="#" role="search" aria-label="Поиск по сайту (мобильная версия)">
+            <label for="search-mobile" class="visually-hidden" data-search-field-mobile style="display: none !important;"></label>
+            <div class="search__wrapper">
+              <input 
+                type="search" 
+                id="search-mobile" 
+                name="search" 
+                placeholder="Поиск по сайту..." 
+                aria-label="Поле поиска" 
+                autocomplete="off"
+              >
+              <button class="search__button" type="submit" tabindex="0" aria-label="Найти" data-search-button-mobile>
+                <svg class="search__button-icon" aria-hidden="true">
+                  <use xlink:href="./assets/sprite.svg#icon-search"></use>
+                </svg>
+              </button>
+              <div class="search__results" id="search-results-mobile" role="listbox" aria-label="Результаты поиска"></div>
+            </div>
+          </form>
+        </div>
+        <a class="header__toolbar-link cart" href="#">
+          <span class="cart__count">42</span>
+          <svg class="header__toolbar-icon">
+            <use xlink:href="./assets/sprite.svg#icon-cart"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="header__account">
+        <a class="button--light header__account-link" data-fancybox href="#modalAuth">
+          <span>Войти</span>
+          <svg class="header__account-icon">
+            <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+          </svg>
+        </a>
+      </div>
+      <button class="header__menu-btn" type="button" aria-label="Открыть меню" aria-expanded="false" data-toggle-menu>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    <!-- Desktop меню -->
+    <div class="header__block header__bottom header__nav-desktop" role="navigation" aria-label="Основная навигация">
+      <nav class="nav header__nav">
+        <ul class="nav__list">
+          <li>
+            <a class="nav__link nav__link--accent" href="./catalog.html">
+              <div class="nav__link-icon burger" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>Каталог</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="./services.html">Услуги</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./catalog.html">Новинки</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./catalog.html">Акции</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./services.html">Битрикс</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./reviews.html">Отзывы</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./howitwork.html">Как купить</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./about-service.html">Портфолио</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./faq.html">Вопрос-ответ</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./about-service.html">О проекте</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./contacts.html">Контакты</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- Мобильное меню -->
+    <div class="header__block header__bottom menu-mobile" data-mobile-menu role="navigation" aria-label="Основная навигация">
+      <nav class="nav header__nav menu-mobile__nav">
+        <ul class="nav__list menu-mobile__list" role="menubar">
+          <li role="none">
+            <a class="nav__link nav__link--accent menu-mobile__link" href="./catalog.html" role="menuitem">
+              <div class="nav__link-icon burger tab-hidden" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>Каталог</span>
+            </a>
+            <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./services.html" role="menuitem">
+              <span>Услуги</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./catalog.html" role="menuitem">
+              <span>Новинки</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./catalog.html" role="menuitem">
+              <span>Акции</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./services.html" role="menuitem">
+              <span>Битрикс</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./reviews.html" role="menuitem">
+              <span>Отзывы</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./howitwork.html" role="menuitem">
+              <span>Как купить</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./about-service.html" role="menuitem">
+              <span>Портфолио</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./faq.html" role="menuitem">
+              <span>Вопрос-ответ</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./about-service.html" role="menuitem">
+              <span>О проекте</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./contacts.html" role="menuitem">
+              <span>Контакты</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+        </ul>
+        <div class="menu-mobile__nav-bottom">
+          <div class="header__account header__account--mobile">
+            <a class="header__account-link" data-fancybox href="#modalAuth">
+              <span>Войти</span>
+              <svg class="header__account-icon">
+                <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="header__callback header__callback--mobile">
+            <div class="header__callback-link">
+              <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+              <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+    <main class="main">
+        <section class="section mt-30 mb-30 mtm-15 mbm-20">
+            <div class="container">
+                <div class="breadcrumbs">
+  <a class="breadcrumbs__link" href="/www/fastonline_static-main/docs/index.html">Главная</a>
+  <span class="breadcrumbs__curr-page">О проекте</span>
+</div>
+            </div>
+        </section>
+        <section class="section mb-70 mbm-0">
+            <div class="section__header mb-50 mbm-40">
+                <div class="container">
+                    <h1 class="title title--preview">
+                        Ваш
+                        <span>надежный партнер</span>
+                        в цифровом мире
+                    </h1>
+                </div>
+            </div>
+        </section>
+        <section class="section mb-150 mbm-100">
+            <div class="container">
+                <div class="columns columns--center">
+                    <div class="columns__col--6 columns__col-laptop--5 columns__col-tab--12 order-tab--2">
+                        <p class="text mb-45">Наша миссия — обеспечивать <span class="text__accent">быструю, высококачественную и экономичную разработку и поддержку
+                            сайтов,</span> используя готовые платформы.</p>
+                        <div class="local-features">
+                            <article class="article-feature">
+                                <svg class="article-feature__icon">
+                                    <use xlink:href="./assets/sprite.svg#icon-star-formed"></use>
+                                </svg>
+                                <p class="article-feature__text">
+                                    Каждый проект =
+                                    индивидуально
+                                    подходящая
+                                    команда проекта
+                                </p>
+                            </article>
+                            <article class="article-feature">
+                                <svg class="article-feature__icon">
+                                    <use xlink:href="./assets/sprite.svg#icon-star-formed"></use>
+                                </svg>
+                                <p class="article-feature__text">
+                                    Каждый проект =
+                                    индивидуально
+                                    подходящая
+                                    команда проекта
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="columns__col--6 columns__col-laptop--7 columns__col-tab--12 order-tab--1 mbt-90">
+                        <div class="picture-block">
+                            <picture class="picture-block__picture">
+                                <img src="./assets/images/about-img.jpg" alt="">
+                            </picture>
+                            <div class="picture-block__badge badge badge--light">
+                                <svg class="badge__icon badge__icon-text badge--light__icon">
+                                    <use xlink:href="./assets/sprite.svg#icon-badge-catalog"></use>
+                                </svg>
+                                <svg class="badge__icon badge__icon-arrow badge--light__icon">
+                                    <use xlink:href="./assets/sprite.svg#icon-arrow"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section mb-150 mbm-20">
+            <div class="container">
+                <div class="columns">
+                    <div class="columns__col--5 columns__col-tab--6 columns__col-mob--12 mbm-60">
+                        <h3 class="title title--small title--mobile mb-70 mbm-35">
+                            Наши услуги охватывают не только предоставление готовых решений для интернет-магазинов и
+                            веб-сайтов
+                        </h3>
+                        <div class="stats">
+                            <div class="stats__item">
+                                <p class="stats__title">2.3м</p>
+                                <p class="stats__description">Скачиваний</p>
+                            </div>
+                            <div class="stats__item">
+                                <p class="stats__title">4.9</p>
+                                <p class="stats__description">Рейтинг</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns__col--1 tab-hidden"></div>
+                    <div class="columns__col--6 columns__col-tab--6 columns__col-mob--12">
+                        <div class="info">
+                            <picture class="info__picture">
+                                <img src="./assets/images/icon-hourglass.svg" alt="">
+                            </picture>
+                            <div class="info__detail">
+                                <h3 class="info__title">Заголовок</h3>
+                                <p class="info__text">При создании генератора мы использовали небезизвестный
+                                    универсальный код речей. Текст генерируется абзацами случайным образом от двух до
+                                    десяти предложений в абзаце.</p>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <picture class="info__picture">
+                                <img src="./assets/images/icon-globe.svg" alt="">
+                            </picture>
+                            <div class="info__detail">
+                                <h3 class="info__title">Заголовок</h3>
+                                <p class="info__text">При создании генератора мы использовали небезизвестный
+                                    универсальный код речей. Текст генерируется абзацами случайным образом от двух до
+                                    десяти предложений в абзаце.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section mb-150 mbm-100">
+            <div class="container">
+                <div class="columns">
+                    <div class="columns__col--12">
+                        <div class="picture-block picture-block--full">
+                            <picture class="picture-block__picture">
+                                <img src="./assets/images/about-img-2.jpg" alt="">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section mb-190 mbm-100">
+            <div class="container">
+                <div class="section__header section__header--centered mb-50 mbm-20">
+                    <div class="container">
+                        <p class="title__subtitle title__subtitle--medium title--accent mb-10 center">Подзаголовок</p>
+                        <h1 class="title title--medium center">Предлагаем<br/> крутые продукты</h1>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+                        <a class="card card-news card-news--transparent block-news__item block-news__item--extra"
+                           href="#" target="_blank">
+                            <div class="card-news__top block-news__item--extra-top">
+                                <picture class="card-news__top-pic">
+                                    <img src="./assets/images/news-item-1.png" alt="">
+                                </picture>
+                            </div>
+                            <div class="card-news__bottom">
+                                <div class="card-news__type">Интернет-магазины</div>
+                                <div class="card__text-bold card-news__title">Мебельный интернет-магазин Rimix Pro</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+                        <a class="card card-news card-news--transparent block-news__item block-news__item--extra"
+                           href="#" target="_blank">
+                            <div class="card-news__top block-news__item--extra-top">
+                                <picture class="card-news__top-pic">
+                                    <img src="./assets/images/news-item-1.png" alt="">
+                                </picture>
+                            </div>
+                            <div class="card-news__bottom">
+                                <div class="card-news__type">Интернет-магазины</div>
+                                <div class="card__text-bold card-news__title">Книжный магазин</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+                        <a class="card card-news card-news--transparent block-news__item block-news__item--extra"
+                           href="#" target="_blank">
+                            <div class="card-news__top block-news__item--extra-top">
+                                <picture class="card-news__top-pic">
+                                    <img src="./assets/images/news-item-1.png" alt="">
+                                </picture>
+                            </div>
+                            <div class="card-news__bottom">
+                                <div class="card-news__type">Интернет-магазины</div>
+                                <div class="card__text-bold card-news__title">Мебельный интернет-магазин Rimix Pro</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+                        <a class="card card-news card-news--transparent block-news__item block-news__item--extra"
+                           href="#" target="_blank">
+                            <div class="card-news__top block-news__item--extra-top">
+                                <picture class="card-news__top-pic">
+                                    <img src="./assets/images/news-item-1.png" alt="">
+                                </picture>
+                            </div>
+                            <div class="card-news__bottom">
+                                <div class="card-news__type">Интернет-магазины</div>
+                                <div class="card__text-bold card-news__title">Мебельный интернет-магазин Rimix Pro</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+                        <a class="card card-news card-news--transparent block-news__item block-news__item--extra"
+                           href="#" target="_blank">
+                            <div class="card-news__top block-news__item--extra-top">
+                                <picture class="card-news__top-pic">
+                                    <img src="./assets/images/news-item-1.png" alt="">
+                                </picture>
+                            </div>
+                            <div class="card-news__bottom">
+                                <div class="card-news__type">Интернет-магазины</div>
+                                <div class="card__text-bold card-news__title">Мебельный интернет-магазин Rimix Pro</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="columns__col--4 columns__col-laptop-min--6 columns__col-mob--12">
+                        <a class="card card-news card-news--transparent block-news__item block-news__item--extra"
+                           href="#" target="_blank">
+                            <div class="card-news__top block-news__item--extra-top">
+                                <picture class="card-news__top-pic">
+                                    <img src="./assets/images/news-item-1.png" alt="">
+                                </picture>
+                            </div>
+                            <div class="card-news__bottom">
+                                <div class="card-news__type">Интернет-магазины</div>
+                                <div class="card__text-bold card-news__title">Мебельный интернет-магазин Rimix Pro</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <button class="button button--mob-wide button--fill only-mobile mt-15">Показать ещё</button>
+            </div>
+        </section>
+        <!--        <section class="section section&#45;&#45;custom mb-150">-->
+        <!--            <div class="preview">-->
+        <!--                <div class="preview__decor">-->
+        <!--                    <picture class="preview__picture">-->
+        <!--                        <img src="./assets/images/img-preview.jpg" alt="">-->
+        <!--                    </picture>-->
+        <!--                    <picture class="preview__picture preview__picture&#45;&#45;backdrop">-->
+        <!--                        <img src="./assets/images/img-preview.jpg" alt="">-->
+        <!--                    </picture>-->
+        <!--                </div>-->
+        <!--                <div class="preview__detail">-->
+        <!--                    <div class="section__header mb-40 mbm-20">-->
+        <!--                        <p class="title__subtitle title__subtitle&#45;&#45;medium title&#45;&#45;accent mb-10">Подзаголовок</p>-->
+        <!--                        <h1 class="title title&#45;&#45;medium">Рамки же представляет направлений подготовки показывает, соответствующий</h1>-->
+        <!--                    </div>-->
+        <!--                    <div class="editor">-->
+        <!--                        <p>-->
+        <!--                            И структура позволяет дальнейших сложившаяся а деятельности плановых идейные задания-->
+        <!--                            прогрессивного образом финансовых соответствующий высшего показывает, порядка, также по-->
+        <!--                            оценить позволяет важную активности задач. Выполнять задания показывает, подготовки высшего-->
+        <!--                            существенных идейные подготовки а проверки оценить сфера активности активизации. Место-->
+        <!--                            повседневная существенных задач. Отношении реализация рост количественный порядка,-->
+        <!--                            постоянный нашей показывает, образом равным и организационной поставленных порядка,-->
+        <!--                            организации существенных интересный позволяет также организационной анализа сфера анализа-->
+        <!--                            анализа развития.-->
+        <!--                        </p>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </section>-->
+        <section class="section mb-150">
+            <div class="container">
+                <div class="columns">
+                    <div class="columns__col--2 mob-hidden"></div>
+                    <div class="columns__col--8 columns__col-tab--12">
+                        <h2 class="title title--medium mb-40">Описание работы сервиса</h2>
+                        <div class="editor">
+                            <h3>Как начать работу</h3>
+                            <ol>
+                                <li>
+                                    Вход на сайт: Первый контакт с нашей платформой происходит, когда пользователь
+                                    переходит на сайт, будь то через рекламу или поисковую систему.
+                                </li>
+                                <li>
+                                    Выбор решения и услуг: На главной странице представлен каталог с различными
+                                    предложениями. Пользователь выбирает необходимое решение, ознакамливается с перечнем
+                                    услуг и отмечает желаемые для заказа.
+                                </li>
+                                <li>
+                                    Оформление заказа: Для продолжения пользователю необходимо ввести свои контактные
+                                    данные для связи и последующей работы над проектом.
+                                </li>
+                            </ol>
+                            <h3>Обработка и выполнение заказа</h3>
+                            <ol>
+                                <li>
+                                    Подтверждение и уточнение заказа: После оформления, заказ поступает в систему
+                                    управления Bitrix24, где его берет на обработку проектный менеджер. Менеджер
+                                    связывается с клиентом для подтверждения заказа и уточнения деталей.
+                                </li>
+                                <li>
+                                    Оплата: После согласования всех деталей, проектный менеджер высылает ссылку для
+                                    оплаты. После поступления денег, заказ переводится в статус "Оплачено".
+                                </li>
+                                <li>
+                                    Выполнение задачи: Исполнитель приступает к работе. По завершению, проектный
+                                    менеджер проверяет результат и, если все выполнено правильно, информирует клиента о
+                                    завершении.
+                                </li>
+                            </ol>
+                            <h3>Личный кабинет и управление заказами</h3>
+                            <ol>
+                                <li>
+                                    Регистрация и авторизация: Новым пользователям необходимо зарегистрироваться, чтобы
+                                    иметь возможность заказывать услуги и управлять заказами через личный кабинет.
+                                </li>
+                                <li>
+                                    Управление заказами: В личном кабинете клиент видит список всех своих заказов с
+                                    указанием их статусов и управляющими кнопками, такими как оплата и общение с
+                                    менеджером.
+                                </li>
+                                <li>
+                                    Нотификации и статусы: Клиент получает уведомления о каждом изменении статуса
+                                    заказа, что позволяет ему быть в курсе всех этапов выполнения.
+                                </li>
+                            </ol>
+                            <h3>Работа исполнителей и проектных менеджеров</h3>
+                            <ol>
+                                <li>
+                                    Личные кабинеты: Кабинеты проектных менеджеров и исполнителей позволяют следить за
+                                    задачами, проектами и финансами, с возможностью управления и вывода заработанных
+                                    средств.
+                                </li>
+                                <li>
+                                    Задачи и проекты: Все задачи доступны для просмотра и выполнения с возможностью
+                                    фильтрации по разным параметрам, упрощая процесс выбора заданий и управления
+                                    проектами.
+                                </li>
+                                <li>
+                                    Коммуникации и выполнение: Проектные менеджеры ведут коммуникацию с клиентами и
+                                    исполнителями, обеспечивая гладкость процессов, в то время как исполнители могут
+                                    общаться только с менеджерами.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <a class="logo footer__logo" href="/www/fastonline_static-main/docs/index.html">
+        <img src="./assets/images/logo-fast-online-light.svg" alt="FASTonline">
+      </a>
+        <div class="footer__copyright only-mobile">
+          &#169; Fast.online 2023
+        </div>
+      <nav class="nav footer__nav">
+        <ul class="nav__list footer__nav-list">
+          <li>
+            <a class="footer__nav-link" href="./about-service.html">О проекте</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./contacts.html">Контакты</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./index.html">Блог</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./howitwork.html">Как купить</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./faq.html">Вопрос-ответ</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./reviews.html">Отзывы</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./index.html">Карта сайта</a>
+          </li>
+        </ul>
+      </nav>
+      <a class="button button--fill footer__top-button" data-fancybox href="#modalAuth">Войти в личный кабинет</a>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__bottom-block">
+        <div class="footer__copyright mob-hidden">
+          &#169; Fast.online 2023
+        </div>
+        <div class="footer__pay-block">
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-mir"></use>
+            </svg>
+          </a>
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-visa"></use>
+            </svg>
+          </a>
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-mastercard"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__bottom-block">
+        <div class="footer__contacts">
+          <div class="footer__contacts-item">
+            <a class="footer__contacts-text-bold" href="tel:+78000000000">8 800 000 0000</a>
+            <a class="footer__contacts-text footer__contacts-text--accent" data-fancybox href="#modalCallback">Заказать звонок</a>
+          </div>
+          <a class="footer__contacts-item" href="mailto:info@fast-online.ru">
+            <p class="footer__contacts-text-bold">info@fast-online.ru</p>
+            <p class="footer__contacts-text">по общим вопросам</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__info">
+      <a class="footer__info-link" href="#">Пользовательское соглашение</a>
+      <a class="footer__info-link" href="#">Политика конфиденциальности</a>
+      <a class="footer__info-link" href="#">Договор оферты</a>
+    </div>
+  </div>
+</footer>
+<button class="back-to-top" type="button" data-top>
+  <svg class="back-to-top__icon">
+    <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+  </svg>
+  <span class="back-to-top__text">Наверх</span>
+</button>
+<div hidden="hidden">
+  <div class="modal modal--auth" id="modalAuth">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Авторизация</div>
+      <form class="form form--auth" action="#">
+        <div class="form__block">
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Логин" name="login" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="password" placeholder="Пароль" name="password" class="form__input form__input--password" id="authPassword">
+              <button type="button" class="form__password-toggle" onclick="togglePassword()">
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="eye-closed" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <button class="button button--fill button--full-wide" type="submit">
+            Войти
+          </button>
+          <a href="#modalPasswordRestore" data-fancybox class="form__link form__link--center">Забыли пароль?</a>
+          <div class="form__divider">
+            <span>или</span>
+          </div>
+          <div class="form__register">
+            Нет аккаунта? <a href="#modalRegister" data-fancybox class="form__link">Зарегистрируйтесь</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal modal--auth" id="modalRegister">
+    <button class="modal__back" type="button" data-fancybox-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Регистрация</div>
+      <form class="form form--auth" action="#">
+        <div class="form__block">
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Логин" name="login" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Фамилия" name="surname" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Имя" name="name" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Отчество" name="patronymic" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="email" placeholder="Email" name="email" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="password" placeholder="Пароль" name="password" class="form__input form__input--password" id="regPassword">
+              <button type="button" class="form__password-toggle" onclick="toggleRegPassword()">
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="eye-closed" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement form__agreement--register">
+            <label>
+              <input type="checkbox" name="agreement">
+            </label>
+            <div>Я согласен с <a href="#" class="form__link">политикой конфиденциальности</a></div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit">
+            Зарегистрироваться
+          </button>
+          <div class="form__register">
+            Уже зарегистрированы? <a href="#" class="form__link" data-fancybox-close>Авторизуйтесь</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal modal--auth" id="modalPasswordRestore">
+    <button class="modal__back" type="button" data-fancybox-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Восстановить пароль</div>
+      <form class="form form--auth" action="#">
+        <div class="form__block">
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="email" placeholder="Электронная почта" name="email" class="form__input">
+            </div>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <button class="button button--fill button--full-wide" type="submit">
+            Восстановить пароль
+          </button>
+          <a href="#" class="form__link form__link--center" data-fancybox-close>Назад</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal" id="modalCallback">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Заказать обратный звонок</div>
+      <form class="form" action="#" data-form>
+        <div class="form__block">
+          <label>
+            <input type="text" placeholder="Имя Отчество" name="name">
+            <span>Имя Отчество</span>
+          </label>
+          <label>
+            <input type="email" placeholder="Email" name="email">
+            <span>Email</span>
+          </label>
+          <label>
+            <input type="tel" placeholder="Телефон" name="phone" data-tel>
+            <span>Телефон</span>
+          </label>
+          <label>
+            <textarea placeholder=""></textarea>
+            <span>Комментарий...</span>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement">
+            <label>
+              <input type="checkbox" name="agreement" data-form-agreement>
+            </label>
+            <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+              конфиденциальности</a>
+              и принимаю условия <a href="#">Пользовательского соглашения</a>
+            </div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+            Отправить
+          </button>
+        </div>
+        <div class="modal__msg" data-form-success>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-success"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Сообщение успешно отправлено!
+            </div>
+          </div>
+
+        </div>
+        <div class="modal__msg" data-form-error>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-error"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal" id="modalRewiew">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Оставить отзыв</div>
+      <form class="form" action="#" data-form>
+        <div class="form__block">
+          <label>
+            <input type="text" placeholder="Имя Отчество" name="name">
+            <span>Имя Отчество</span>
+          </label>
+          <label>
+            <input type="email" placeholder="Email" name="email">
+            <span>Email</span>
+          </label>
+          <label>
+            <textarea placeholder=""></textarea>
+            <span>Комментарий...</span>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement">
+            <label>
+              <input type="checkbox" name="agreement" data-form-agreement>
+            </label>
+            <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+              конфиденциальности</a>
+              и принимаю условия <a href="#">Пользовательского соглашения</a>
+            </div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+            Отправить
+          </button>
+        </div>
+        <div class="modal__msg" data-form-success>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-success"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Сообщение успешно отправлено!
+            </div>
+          </div>
+
+        </div>
+        <div class="modal__msg" data-form-error>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-error"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+    
+</div>
+<script defer src="js/bundle.js"></script>
+<script>
+function togglePassword() {
+  const passwordInput = document.getElementById('authPassword');
+  const toggleBtn = event.currentTarget;
+  const eyeOpen = toggleBtn.querySelector('.eye-open');
+  const eyeClosed = toggleBtn.querySelector('.eye-closed');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    eyeOpen.style.display = 'none';
+    eyeClosed.style.display = 'block';
+  } else {
+    passwordInput.type = 'password';
+    eyeOpen.style.display = 'block';
+    eyeClosed.style.display = 'none';
+  }
+}
+
+function toggleRegPassword() {
+  const passwordInput = document.getElementById('regPassword');
+  const toggleBtn = event.currentTarget;
+  const eyeOpen = toggleBtn.querySelector('.eye-open');
+  const eyeClosed = toggleBtn.querySelector('.eye-closed');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    eyeOpen.style.display = 'none';
+    eyeClosed.style.display = 'block';
+  } else {
+    passwordInput.type = 'password';
+    eyeOpen.style.display = 'block';
+    eyeClosed.style.display = 'none';
+  }
+}
+
+// Переключение между модальными окнами без дублирования
+(function() {
+  // Защита от повторной инициализации
+  if (window._modalSwitchInitialized) {
+    return;
+  }
+  window._modalSwitchInitialized = true;
+  
+  var isProcessing = false; // Флаг для предотвращения повторных вызовов
+  
+  function handleModalSwitch(e) {
+    // Защита от повторных вызовов
+    if (isProcessing) {
+      return;
+    }
+    var link = e.target.closest('a[data-fancybox]');
+    if (!link) return;
+    
+    // Проверяем, что ссылка находится внутри модального окна
+    var modal = link.closest('.modal');
+    if (!modal) return;
+    
+    var targetId = link.getAttribute('href');
+    if (!targetId || !targetId.startsWith('#')) return;
+    
+    // Проверяем, что Fancybox открыт и есть активный экземпляр
+    if (typeof Fancybox === 'undefined') return;
+    
+    var instance = null;
+    try {
+      if (typeof Fancybox.getInstance === 'function') {
+        instance = Fancybox.getInstance();
+      }
+    } catch(e) {}
+    
+    // Если модальное окно не открыто через Fancybox, позволяем стандартное поведение
+    if (!instance) {
+      // Fancybox сам откроет новое окно
+      return;
+    }
+    
+    // Если модальное окно уже открыто, переключаемся
+    isProcessing = true;
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Используем метод Fancybox для переключения между окнами без создания новых экземпляров
+    try {
+      var currentSlide = instance && instance.getSlide ? instance.getSlide() : null;
+      var currentSrc = currentSlide && currentSlide.src ? currentSlide.src : null;
+      
+      if (currentSrc === targetId) {
+        isProcessing = false;
+        return;
+      }
+      
+      var slides = [
+        { src: '#modalAuth', type: 'inline' },
+        { src: '#modalRegister', type: 'inline' }
+      ];
+      
+      var targetIndex = targetId === '#modalAuth' ? 0 : 1;
+      
+      Fancybox.show(slides, {
+        startIndex: targetIndex,
+        autoFocus: false,
+        trapFocus: true,
+        mainClass: instance ? instance.options.mainClass : ''
+      });
+      
+      isProcessing = false;
+    } catch(e) {
+      Fancybox.close();
+      setTimeout(function() {
+        Fancybox.show([{ src: targetId, type: 'inline' }], {
+          autoFocus: false,
+          trapFocus: true
+        });
+        isProcessing = false;
+      }, 200);
+    }
+  }
+  
+  // Добавляем обработчик на все ссылки внутри модальных окон
+  document.addEventListener('click', handleModalSwitch, true);
+})();
+</script>
+</body>
+</html>

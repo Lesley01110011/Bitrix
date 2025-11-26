@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="194x194" href="./assets/favicon/favicon-194x194.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./assets/favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="./assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
+  <title>Страница услуг</title>
+<link href="./css/main.css" rel="stylesheet"></head>
+<body class="body">
+<script>
+// Поиск в header - выполняется с максимальным приоритетом
+(function() {
+  'use strict';
+  
+  console.log('=== ПОИСК: Загрузка скрипта ===');
+  
+  var data = [
+    {t:'Готовые интернет-магазины на Bitrix',u:'./catalog.html',c:'Каталог'},
+    {t:'Разработка корпоративных сайтов',u:'./services.html',c:'Услуги'},
+    {t:'Новые шаблоны для интернет-магазинов',u:'./catalog.html',c:'Новинки'},
+    {t:'Скидки на услуги разработки',u:'./catalog.html',c:'Акции'},
+    {t:'Интеграция Bitrix24 с внешними системами',u:'./services.html',c:'Битрикс'},
+    {t:'Отзывы клиентов о наших услугах',u:'./reviews.html',c:'Отзывы'},
+    {t:'Портфолио выполненных проектов',u:'./about-service.html',c:'Портфолио'},
+    {t:'Часто задаваемые вопросы',u:'./faq.html',c:'Вопрос-ответ'}
+  ];
+  
+  function search(query) {
+    if (!query || !query.trim()) return [];
+    var q = query.trim().toLowerCase();
+    return data.filter(function(i) {
+      return i.t.toLowerCase().indexOf(q) !== -1 || i.c.toLowerCase().indexOf(q) !== -1;
+    });
+  }
+  
+  window.doSearch = function(type) {
+    console.log('doSearch вызван, тип:', type);
+    var id = type === 'desktop' ? 'search-desktop' : 'search-mobile';
+    var input = document.getElementById(id);
+    if (!input) {
+      console.error('Поле не найдено:', id);
+      return false;
+    }
+    var q = input.value.trim();
+    console.log('Запрос:', q);
+    if (!q) {
+      return false;
+    }
+    var r = search(q);
+    console.log('Найдено результатов:', r.length);
+    if (r.length > 0) {
+      var url = r[0].u + '?q=' + encodeURIComponent(q);
+      console.log('Переход на:', url);
+      window.location.href = url;
+    } else {
+      var container = document.getElementById('search-results-' + type);
+      if (container) {
+        container.classList.remove('active');
+        container.innerHTML = '';
+      }
+    }
+    return false;
+  };
+  
+  window.showAutocomplete = function(type) {
+    var id = type === 'desktop' ? 'search-desktop' : 'search-mobile';
+    var input = document.getElementById(id);
+    var container = document.getElementById('search-results-' + type);
+    if (!input || !container) return;
+    var q = input.value.trim();
+    if (q.length < 2) {
+      container.classList.remove('active');
+      container.innerHTML = '';
+      return;
+    }
+    var r = search(q);
+    if (r.length === 0) {
+      container.classList.remove('active');
+      container.innerHTML = '';
+      return;
+    }
+    var h = r.map(function(item) {
+      return '<a href="' + item.u + '?q=' + encodeURIComponent(q) + '" class="search__results-item">' +
+             '<div class="search__results-item-title">' + item.t + '</div>' +
+             '<div class="search__results-item-category">' + item.c + '</div></a>';
+    }).join('');
+    container.innerHTML = h;
+    container.classList.add('active');
+  };
+  
+  function init() {
+    console.log('=== ПОИСК: Инициализация ===');
+    
+    var df = document.querySelector('.header__search.mob-hidden form');
+    var di = document.getElementById('search-desktop');
+    var db = df ? df.querySelector('button[type="submit"]') : null;
+    
+    var mf = document.querySelector('.header__search.only-mobile form');
+    var mi = document.getElementById('search-mobile');
+    var mb = mf ? mf.querySelector('button[type="submit"]') : null;
+    
+    console.log('Desktop form:', df, 'input:', di, 'button:', db);
+    console.log('Mobile form:', mf, 'input:', mi, 'button:', mb);
+    
+    if (df && di) {
+      df.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log('Desktop FORM SUBMIT');
+        return doSearch('desktop');
+      }, true);
+      
+      if (db) {
+        db.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Desktop BUTTON CLICK');
+          return doSearch('desktop');
+        }, true);
+      }
+      
+      di.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Desktop ENTER');
+          return doSearch('desktop');
+        }
+      }, true);
+      
+      di.addEventListener('input', function() {
+        console.log('Desktop INPUT');
+        showAutocomplete('desktop');
+      });
+    }
+    
+    if (mf && mi) {
+      mf.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log('Mobile FORM SUBMIT');
+        doSearch('mobile');
+        var btn = document.querySelector("[data-search-button-mobile]");
+        var field = document.querySelector("[data-search-field-mobile]");
+        if (btn && field) {
+          field.classList.remove("active");
+          btn.classList.remove("active");
+          setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+        }
+        return false;
+      }, true);
+      
+      if (mb) {
+        mb.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Mobile BUTTON CLICK');
+          doSearch('mobile');
+          var btn = document.querySelector("[data-search-button-mobile]");
+          var field = document.querySelector("[data-search-field-mobile]");
+          if (btn && field) {
+            field.classList.remove("active");
+            btn.classList.remove("active");
+            setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+          }
+          return false;
+        }, true);
+      }
+      
+      mi.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Mobile ENTER');
+          doSearch('mobile');
+          var btn = document.querySelector("[data-search-button-mobile]");
+          var field = document.querySelector("[data-search-field-mobile]");
+          if (btn && field) {
+            field.classList.remove("active");
+            btn.classList.remove("active");
+            setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+          }
+          return false;
+        }
+      }, true);
+      
+      mi.addEventListener('input', function() {
+        console.log('Mobile INPUT');
+        showAutocomplete('mobile');
+      });
+    }
+    
+    console.log('=== ПОИСК: Инициализация завершена ===');
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, true);
+  } else {
+    init();
+  }
+  
+  setTimeout(init, 50);
+  setTimeout(init, 100);
+  setTimeout(init, 300);
+  setTimeout(init, 500);
+  setTimeout(init, 1000);
+  
+  console.log('=== ПОИСК: Скрипт загружен ===');
+})();
+</script>
+<div class="main-container">
+  <header class="header">
+  <div class="container">
+    <div class="header__block header__top">
+      <a class="logo header__logo" href="/" data-logo-link>
+        <img src="./assets/images/logo-fast-online.svg" alt="FASTonline">
+      </a>
+      <div class="search header__search mob-hidden">
+        <form action="#" role="search" aria-label="Поиск по сайту">
+          <div class="search__wrapper">
+            <input 
+              type="search" 
+              id="search-desktop" 
+              name="search" 
+              placeholder="Поиск по сайту..." 
+              aria-label="Поиск по сайту" 
+              autocomplete="off"
+            >
+            <button class="search__button" type="submit" aria-label="Найти">
+              <svg class="search__button-icon" aria-hidden="true">
+                <use xlink:href="./assets/sprite.svg#icon-search"></use>
+              </svg>
+            </button>
+            <div class="search__results" id="search-results-desktop" role="listbox" aria-label="Результаты поиска"></div>
+          </div>
+        </form>
+      </div>
+      <div class="header__callback">
+        <div class="header__callback-link">
+          <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+          <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+        </div>
+      </div>
+      <div class="header__toolbar">
+        <a class="header__toolbar-link" href="#">
+          <svg class="header__toolbar-icon">
+            <use xlink:href="./assets/sprite.svg#icon-fav"></use>
+          </svg>
+        </a>
+        <div class="search header__search only-mobile">
+          <form action="#" role="search" aria-label="Поиск по сайту (мобильная версия)">
+            <label for="search-mobile" class="visually-hidden" data-search-field-mobile style="display: none !important;"></label>
+            <div class="search__wrapper">
+              <input 
+                type="search" 
+                id="search-mobile" 
+                name="search" 
+                placeholder="Поиск по сайту..." 
+                aria-label="Поиск по сайту" 
+                autocomplete="off"
+              >
+              <button class="search__button" type="submit" tabindex="0" aria-label="Найти" data-search-button-mobile>
+                <svg class="search__button-icon" aria-hidden="true">
+                  <use xlink:href="./assets/sprite.svg#icon-search"></use>
+                </svg>
+              </button>
+              <div class="search__results" id="search-results-mobile" role="listbox" aria-label="Результаты поиска"></div>
+            </div>
+          </form>
+        </div>
+        <a class="header__toolbar-link cart" href="#">
+          <span class="cart__count">42</span>
+          <svg class="header__toolbar-icon">
+            <use xlink:href="./assets/sprite.svg#icon-cart"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="header__account">
+        <a class="button--light header__account-link" data-fancybox href="#modalAuth">
+          <span>Войти</span>
+          <svg class="header__account-icon">
+            <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+          </svg>
+        </a>
+      </div>
+      <button class="header__menu-btn" type="button" aria-label="Открыть меню" aria-expanded="false" data-toggle-menu>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    <!-- Desktop меню -->
+    <div class="header__block header__bottom header__nav-desktop" role="navigation" aria-label="Основная навигация">
+      <nav class="nav header__nav">
+        <ul class="nav__list">
+          <li>
+            <a class="nav__link nav__link--accent" href="/www/fastonline_static-main/docs/catalog.html">
+              <div class="nav__link-icon burger" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>Каталог</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/services.html">Услуги</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/catalog.html">Новинки</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/catalog.html">Акции</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/services.html">Битрикс</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/reviews.html">Отзывы</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/howitwork.html">Как купить</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/about-service.html">Портфолио</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/faq.html">Вопрос-ответ</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/about-service.html">О проекте</a>
+          </li>
+          <li>
+            <a class="nav__link" href="/www/fastonline_static-main/docs/contacts.html">Контакты</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- Мобильное меню -->
+    <div class="header__block header__bottom menu-mobile" data-mobile-menu role="navigation" aria-label="Основная навигация">
+      <nav class="nav header__nav menu-mobile__nav">
+        <ul class="nav__list menu-mobile__list" role="menubar">
+          <li role="none">
+            <a class="nav__link nav__link--accent menu-mobile__link" href="/www/fastonline_static-main/docs/catalog.html" role="menuitem">
+              <div class="nav__link-icon burger tab-hidden" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>Каталог</span>
+            </a>
+            <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/services.html" role="menuitem">
+              <span>Услуги</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/catalog.html" role="menuitem">
+              <span>Новинки</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/catalog.html" role="menuitem">
+              <span>Акции</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/services.html" role="menuitem">
+              <span>Битрикс</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/reviews.html" role="menuitem">
+              <span>Отзывы</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/howitwork.html" role="menuitem">
+              <span>Как купить</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/about-service.html" role="menuitem">
+              <span>Портфолио</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/faq.html" role="menuitem">
+              <span>Вопрос-ответ</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/about-service.html" role="menuitem">
+              <span>О проекте</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="/www/fastonline_static-main/docs/contacts.html" role="menuitem">
+              <span>Контакты</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+        </ul>
+        <div class="menu-mobile__nav-bottom">
+          <div class="header__account header__account--mobile">
+            <a class="header__account-link" data-fancybox href="#modalAuth">
+              <span>Войти</span>
+              <svg class="header__account-icon">
+                <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="header__callback header__callback--mobile">
+            <div class="header__callback-link">
+              <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+              <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+  <main class="main">
+    <section class="section mt-30 mb-30 mtm-15 mbm-20">
+      <div class="container">
+        <div class="breadcrumbs">
+  <a class="breadcrumbs__link" href="/">Главная</a>
+  <span class="breadcrumbs__curr-page">Услуги</span>
+</div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section__header mb-50 mbm-20">
+        <div class="container">
+          <h1 class="title">Услуги</h1>
+        </div>
+      </div>
+      <div class="section--color section--full-height pt-80 pb-120 ptm-20 pbm-30">
+        <div class="block-sort" data-sort-list>
+          <div class="container">
+            <div class="block-sort__dropdown" data-select>
+              <button class="block-sort__dropdown-button" type="button" data-select-btn>
+                <span>Все</span>
+              </button>
+              <svg class="block-sort__dropdown-icon">
+                <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+              </svg>
+              <ul class="block-sort__list services-sort" data-select-list>
+                <li class="block-sort__list-item services-sort__btn active" role="option" data-value="Все" data-sort-btn="all">
+                  Все 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Дизайн"
+                    data-sort-btn="design">Дизайн 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Интеграция"
+                    data-sort-btn="integration">Интеграция 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Верстка"
+                    data-sort-btn="typesetting">Верстка 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Тех поддержка"
+                    data-sort-btn="support">Тех поддержка 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="Контент"
+                    data-sort-btn="content">Контент 39</li>
+                <li class="block-sort__list-item services-sort__btn" role="option" data-value="SEO" data-sort-btn="seo">
+                  SEO 39</li>
+              </ul>
+              <input class="block-sort__dropdown-input" type="text" name="select-category" value="" data-select-input />
+            </div>
+            <div class="block-sort-grid mb-60 mbm-20">
+              <div class="block-sort-grid__item" data-sort-item="design">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="seo">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="integration">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="typesetting">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="seo">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="integration">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="content">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="support">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+              <div class="block-sort-grid__item" data-sort-item="seo">
+                <div class="card card-srv">
+  <div class="card-srv__top">
+    <div class="card__text-bold">Разработка дизайна макета на главной</div>
+    <div class="editor card-srv__text">
+      <p>Задача организации, в особенности же сложившаяся структура организации способствует подготовки </p>
+    </div>
+  </div>
+  <div class="card-srv__bottom">
+    <div class="card__text-bold">15000 ₽</div>
+    <a class="button button--light card-srv__button" href="#">Оставить заявку</a>
+  </div>
+</div>
+              </div>
+
+            </div>
+            <button class="button button--fill centered mb-60 mbm-0" type="button">Показать еще</button>
+            <div class="mob-hidden">
+              <nav class="pagination centered">
+  <a class="pagination__item pagination__btn pagination__btn-prev" href="#">
+    <svg>
+      <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+    </svg>
+  </a>
+  <a class="pagination__item" href="#">1</a>
+  <a class="pagination__item" href="#">2</a>
+  <a class="pagination__item active" href="#">3</a>
+  <a class="pagination__item pagination__btn pagination__btn-next" href="#">
+    <svg>
+      <use xlink:href="./assets/sprite.svg#icon-pagination"></use>
+    </svg>
+  </a>
+</nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <a class="logo footer__logo" href="/">
+        <img src="./assets/images/logo-fast-online-light.svg" alt="FASTonline">
+      </a>
+        <div class="footer__copyright only-mobile">
+          &#169; Fast.online 2023
+        </div>
+      <nav class="nav footer__nav">
+        <ul class="nav__list footer__nav-list">
+          <li>
+            <a class="footer__nav-link" href="./about-service.html">О проекте</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./contacts.html">Контакты</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./index.html">Блог</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./howitwork.html">Как купить</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./faq.html">Вопрос-ответ</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./reviews.html">Отзывы</a>
+          </li>
+          <li>
+            <a class="footer__nav-link" href="./index.html">Карта сайта</a>
+          </li>
+        </ul>
+      </nav>
+      <a class="button button--fill footer__top-button" data-fancybox href="#modalAuth">Войти в личный кабинет</a>
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__bottom-block">
+        <div class="footer__copyright mob-hidden">
+          &#169; Fast.online 2023
+        </div>
+        <div class="footer__pay-block">
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-mir"></use>
+            </svg>
+          </a>
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-visa"></use>
+            </svg>
+          </a>
+          <a class="footer__pay-block-link" href="#">
+            <svg>
+              <use xlink:href="./assets/sprite.svg#icon-mastercard"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__bottom-block">
+        <div class="footer__contacts">
+          <div class="footer__contacts-item">
+            <a class="footer__contacts-text-bold" href="tel:+78000000000">8 800 000 0000</a>
+            <a class="footer__contacts-text footer__contacts-text--accent" data-fancybox href="#modalCallback">Заказать звонок</a>
+          </div>
+          <a class="footer__contacts-item" href="mailto:info@fast-online.ru">
+            <p class="footer__contacts-text-bold">info@fast-online.ru</p>
+            <p class="footer__contacts-text">по общим вопросам</p>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__info">
+      <a class="footer__info-link" href="#">Пользовательское соглашение</a>
+      <a class="footer__info-link" href="#">Политика конфиденциальности</a>
+      <a class="footer__info-link" href="#">Договор оферты</a>
+    </div>
+  </div>
+</footer>
+<button class="back-to-top" type="button" data-top>
+  <svg class="back-to-top__icon">
+    <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+  </svg>
+  <span class="back-to-top__text">Наверх</span>
+</button>
+<div hidden="hidden">
+  <div class="modal modal--auth" id="modalAuth">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Авторизация</div>
+      <form class="form form--auth" action="#">
+        <div class="form__block">
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Логин" name="login" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="password" placeholder="Пароль" name="password" class="form__input form__input--password" id="authPassword">
+              <button type="button" class="form__password-toggle" onclick="togglePassword()">
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="eye-closed" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <button class="button button--fill button--full-wide" type="submit">
+            Войти
+          </button>
+          <a href="#modalPasswordRestore" data-fancybox class="form__link form__link--center">Забыли пароль?</a>
+          <div class="form__divider">
+            <span>или</span>
+          </div>
+          <div class="form__register">
+            Нет аккаунта? <a href="#modalRegister" data-fancybox class="form__link">Зарегистрируйтесь</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal modal--auth" id="modalRegister">
+    <button class="modal__back" type="button" data-fancybox-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Регистрация</div>
+      <form class="form form--auth" action="#">
+        <div class="form__block">
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Логин" name="login" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Фамилия" name="surname" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Имя" name="name" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="text" placeholder="Отчество" name="patronymic" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="email" placeholder="Email" name="email" class="form__input">
+            </div>
+          </label>
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="password" placeholder="Пароль" name="password" class="form__input form__input--password" id="regPassword">
+              <button type="button" class="form__password-toggle" onclick="toggleRegPassword()">
+                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <svg class="eye-closed" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement form__agreement--register">
+            <label>
+              <input type="checkbox" name="agreement">
+            </label>
+            <div>Я согласен с <a href="#" class="form__link">политикой конфиденциальности</a></div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit">
+            Зарегистрироваться
+          </button>
+          <div class="form__register">
+            Уже зарегистрированы? <a href="#" class="form__link" data-fancybox-close>Авторизуйтесь</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal modal--auth" id="modalPasswordRestore">
+    <button class="modal__back" type="button" data-fancybox-close>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Восстановить пароль</div>
+      <form class="form form--auth" action="#">
+        <div class="form__block">
+          <label class="form__label">
+            <div class="form__input-wrapper">
+              <input type="email" placeholder="Электронная почта" name="email" class="form__input">
+            </div>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <button class="button button--fill button--full-wide" type="submit">
+            Восстановить пароль
+          </button>
+          <a href="#" class="form__link form__link--center" data-fancybox-close>Назад</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal" id="modalCallback">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Заказать обратный звонок</div>
+      <form class="form" action="#" data-form>
+        <div class="form__block">
+          <label>
+            <input type="text" placeholder="Имя Отчество" name="name">
+            <span>Имя Отчество</span>
+          </label>
+          <label>
+            <input type="email" placeholder="Email" name="email">
+            <span>Email</span>
+          </label>
+          <label>
+            <input type="tel" placeholder="Телефон" name="phone" data-tel>
+            <span>Телефон</span>
+          </label>
+          <label>
+            <textarea placeholder=""></textarea>
+            <span>Комментарий...</span>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement">
+            <label>
+              <input type="checkbox" name="agreement" data-form-agreement>
+            </label>
+            <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+              конфиденциальности</a>
+              и принимаю условия <a href="#">Пользовательского соглашения</a>
+            </div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+            Отправить
+          </button>
+        </div>
+        <div class="modal__msg" data-form-success>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-success"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Сообщение успешно отправлено!
+            </div>
+          </div>
+
+        </div>
+        <div class="modal__msg" data-form-error>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-error"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal" id="modalRewiew">
+    <button class="modal__close" type="button" data-fancybox-close>
+      <svg class="modal__close-icon">
+        <use xlink:href="./assets/sprite.svg#icon-close"></use>
+      </svg>
+    </button>
+    <div class="modal__inner">
+      <div class="modal__title">Оставить отзыв</div>
+      <form class="form" action="#" data-form>
+        <div class="form__block">
+          <label>
+            <input type="text" placeholder="Имя Отчество" name="name">
+            <span>Имя Отчество</span>
+          </label>
+          <label>
+            <input type="email" placeholder="Email" name="email">
+            <span>Email</span>
+          </label>
+          <label>
+            <textarea placeholder=""></textarea>
+            <span>Комментарий...</span>
+          </label>
+        </div>
+        <div class="form__block form__bottom">
+          <div class="form__agreement">
+            <label>
+              <input type="checkbox" name="agreement" data-form-agreement>
+            </label>
+            <div class="">Соглашаюсь на обработку моих персональных данных в соответствии с <a href="#">Политикой
+              конфиденциальности</a>
+              и принимаю условия <a href="#">Пользовательского соглашения</a>
+            </div>
+          </div>
+          <button class="button button--fill button--full-wide" type="submit" disabled="disabled" data-form-submit>
+            Отправить
+          </button>
+        </div>
+        <div class="modal__msg" data-form-success>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-success"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Сообщение успешно отправлено!
+            </div>
+          </div>
+
+        </div>
+        <div class="modal__msg" data-form-error>
+          <div class="modal__msg-content">
+            <svg class="modal__msg-icon">
+              <use xlink:href="./assets/sprite.svg#icon-error"></use>
+            </svg>
+            <div class="modal__msg-text">
+              Упс! Что-то пошло не так, пожалуйста, попробуйте ещё раз.
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+  
+</div>
+<script defer src="./js/bundle.js"></script>
+<script>
+// КРИТИЧЕСКИЙ ФИКС: Принудительная навигация для логотипа
+(function() {
+  'use strict';
+  function fixLogo() {
+    var logo = document.querySelector("a.header__logo, a[data-logo-link]");
+    if (logo) {
+      logo.setAttribute("href", "/");
+      
+      var newLogo = logo.cloneNode(true);
+      logo.parentNode.replaceChild(newLogo, logo);
+      
+      newLogo.addEventListener("click", function(e) {
+        console.log("ЛОГОТИП КЛИКНУТ! Переход на: /");
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+        e.preventDefault();
+        window.location.href = "/";
+        return false;
+      }, true);
+      
+      newLogo.onclick = function(e) {
+        console.log("ЛОГОТИП onclick! Переход на: /");
+        window.location.href = "/";
+        return false;
+      };
+      
+      var logoImg = newLogo.querySelector("img");
+      if (logoImg) {
+        logoImg.style.cursor = "pointer";
+        logoImg.addEventListener("click", function(e) {
+          console.log("ИЗОБРАЖЕНИЕ ЛОГОТИПА! Переход на: /");
+          e.stopImmediatePropagation();
+          e.stopPropagation();
+          e.preventDefault();
+          window.location.href = "/";
+          return false;
+        }, true);
+        logoImg.onclick = function(e) {
+          window.location.href = "/";
+          return false;
+        };
+      }
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", fixLogo);
+  } else {
+    fixLogo();
+  }
+  setTimeout(fixLogo, 100);
+  setTimeout(fixLogo, 500);
+})();
+</script>
+<script>
+// КРИТИЧЕСКИЙ ФИКС: Принудительная навигация для логотипа
+(function() {
+  'use strict';
+  function fixLogo() {
+    var logo = document.querySelector("a.header__logo, a[data-logo-link]");
+    if (logo) {
+      var currentHref = logo.getAttribute("href");
+      if (!currentHref || currentHref === "#" || currentHref.includes("index.html")) {
+        logo.setAttribute("href", "/");
+      }
+      
+      var newLogo = logo.cloneNode(true);
+      logo.parentNode.replaceChild(newLogo, logo);
+      
+      newLogo.addEventListener("click", function(e) {
+        var href = "/";
+        console.log("ЛОГОТИП КЛИКНУТ! Переход на:", href);
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+        e.preventDefault();
+        window.location.href = href;
+        return false;
+      }, true);
+      
+      newLogo.onclick = function(e) {
+        console.log("ЛОГОТИП onclick! Переход на: /");
+        window.location.href = "/";
+        return false;
+      };
+      
+      var logoImg = newLogo.querySelector("img");
+      if (logoImg) {
+        logoImg.style.cursor = "pointer";
+        logoImg.addEventListener("click", function(e) {
+          console.log("ИЗОБРАЖЕНИЕ ЛОГОТИПА! Переход на: /");
+          e.stopImmediatePropagation();
+          e.stopPropagation();
+          e.preventDefault();
+          window.location.href = "/";
+          return false;
+        }, true);
+        logoImg.onclick = function(e) {
+          window.location.href = "/";
+          return false;
+        };
+      }
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", fixLogo);
+  } else {
+    fixLogo();
+  }
+  setTimeout(fixLogo, 100);
+  setTimeout(fixLogo, 500);
+})();
+</script>
+<script>
+function togglePassword() {
+  const passwordInput = document.getElementById('authPassword');
+  const toggleBtn = event.currentTarget;
+  const eyeOpen = toggleBtn.querySelector('.eye-open');
+  const eyeClosed = toggleBtn.querySelector('.eye-closed');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    eyeOpen.style.display = 'none';
+    eyeClosed.style.display = 'block';
+  } else {
+    passwordInput.type = 'password';
+    eyeOpen.style.display = 'block';
+    eyeClosed.style.display = 'none';
+  }
+}
+
+function toggleRegPassword() {
+  const passwordInput = document.getElementById('regPassword');
+  const toggleBtn = event.currentTarget;
+  const eyeOpen = toggleBtn.querySelector('.eye-open');
+  const eyeClosed = toggleBtn.querySelector('.eye-closed');
+  
+  if (passwordInput.type === 'password') {
+    passwordInput.type = 'text';
+    eyeOpen.style.display = 'none';
+    eyeClosed.style.display = 'block';
+  } else {
+    passwordInput.type = 'password';
+    eyeOpen.style.display = 'block';
+    eyeClosed.style.display = 'none';
+  }
+}
+
+// Переключение между модальными окнами без дублирования
+(function() {
+  // Защита от повторной инициализации
+  if (window._modalSwitchInitialized) {
+    return;
+  }
+  window._modalSwitchInitialized = true;
+  
+  var isProcessing = false; // Флаг для предотвращения повторных вызовов
+  
+  // Перехватываем открытие модальных окон авторизации, регистрации и восстановления пароля
+  // и создаем галерею из трех окон при первом открытии
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[data-fancybox][href="#modalAuth"], a[data-fancybox][href="#modalRegister"], a[data-fancybox][href="#modalPasswordRestore"]');
+    if (!link) return;
+    
+    // Проверяем, что ссылка НЕ находится внутри модального окна (это первое открытие)
+    var modal = link.closest('.modal');
+    if (modal) return; // Если внутри модального окна, это переключение, не обрабатываем
+    
+    // Проверяем, открыт ли уже экземпляр Fancybox
+    if (typeof Fancybox === 'undefined') return;
+    
+    var instance = null;
+    try {
+      if (typeof Fancybox.getInstance === 'function') {
+        instance = Fancybox.getInstance();
+      }
+    } catch(e) {}
+    
+    // Если экземпляр уже открыт, переключаемся на нужный слайд
+    if (instance) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      var targetId = link.getAttribute('href');
+      var targetIndex = 0;
+      if (targetId === '#modalRegister') {
+        targetIndex = 1;
+      } else if (targetId === '#modalPasswordRestore') {
+        targetIndex = 2;
+      }
+      
+      // Переключаемся на нужный слайд в существующем экземпляре
+      try {
+        if (instance.plugins && instance.plugins.SlideShow && typeof instance.plugins.SlideShow.jumpTo === 'function') {
+          instance.plugins.SlideShow.jumpTo(targetIndex);
+          return;
+        }
+      } catch(e) {}
+      
+      // Если jumpTo не работает, закрываем и открываем заново с галереей
+      Fancybox.close();
+      setTimeout(function() {
+        var slides = [
+          { src: '#modalAuth', type: 'inline' },
+          { src: '#modalRegister', type: 'inline' },
+          { src: '#modalPasswordRestore', type: 'inline' }
+        ];
+        Fancybox.show(slides, {
+          startIndex: targetIndex,
+          autoFocus: false,
+          trapFocus: true
+        });
+      }, 200);
+      return;
+    }
+    
+    // Перехватываем первое открытие и создаем галерею
+    e.preventDefault();
+    e.stopPropagation();
+    
+    var targetId = link.getAttribute('href');
+    var slides = [
+      { src: '#modalAuth', type: 'inline' },
+      { src: '#modalRegister', type: 'inline' },
+      { src: '#modalPasswordRestore', type: 'inline' }
+    ];
+    
+    var targetIndex = 0;
+    if (targetId === '#modalRegister') {
+      targetIndex = 1;
+    } else if (targetId === '#modalPasswordRestore') {
+      targetIndex = 2;
+    }
+    
+    // Закрываем все существующие экземпляры перед созданием нового
+    try {
+      var allInstances = Fancybox.getAll();
+      if (allInstances && allInstances.length > 0) {
+        for (var i = 0; i < allInstances.length; i++) {
+          try {
+            allInstances[i].close();
+          } catch(e) {}
+        }
+      }
+    } catch(e) {}
+    
+    setTimeout(function() {
+      Fancybox.show(slides, {
+        startIndex: targetIndex,
+        autoFocus: false,
+        trapFocus: true
+      });
+    }, 100);
+  }, true);
+  
+  function handleModalSwitch(e) {
+    // Защита от повторных вызовов
+    if (isProcessing) {
+      return;
+    }
+    
+    var link = e.target.closest('a[data-fancybox]');
+    if (!link) return;
+    
+    // Проверяем, что ссылка находится внутри модального окна
+    var modal = link.closest('.modal');
+    if (!modal) return;
+    
+    var targetId = link.getAttribute('href');
+    if (!targetId || !targetId.startsWith('#')) return;
+    
+    // Проверяем, что Fancybox открыт и есть активный экземпляр
+    if (typeof Fancybox === 'undefined') return;
+    
+    var instance = null;
+    try {
+      if (typeof Fancybox.getInstance === 'function') {
+        instance = Fancybox.getInstance();
+      }
+    } catch(e) {}
+    
+    // Если модальное окно не открыто через Fancybox, позволяем стандартное поведение
+    if (!instance) {
+      // Fancybox сам откроет новое окно
+      return;
+    }
+    
+    // Если модальное окно уже открыто, переключаемся
+    isProcessing = true;
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Используем метод Fancybox для переключения между окнами без создания новых экземпляров
+    try {
+      // Получаем текущий слайд
+      var currentSlide = instance && instance.getSlide ? instance.getSlide() : null;
+      var currentSrc = currentSlide && currentSlide.src ? currentSlide.src : null;
+      
+      // Если текущее окно уже целевое, ничего не делаем
+      if (currentSrc === targetId) {
+        isProcessing = false;
+        return;
+      }
+      
+      // Определяем индекс целевого слайда в галерее
+      var targetIndex = 0;
+      if (targetId === '#modalRegister') {
+        targetIndex = 1;
+      } else if (targetId === '#modalPasswordRestore') {
+        targetIndex = 2;
+      }
+      
+      // Переключаемся на целевой слайд используя jumpTo - это не создаст новый экземпляр
+      if (instance && instance.plugins && instance.plugins.SlideShow && typeof instance.plugins.SlideShow.jumpTo === 'function') {
+        instance.plugins.SlideShow.jumpTo(targetIndex);
+        isProcessing = false;
+        return;
+      }
+      
+      // Если jumpTo не работает, проверяем есть ли слайды в галерее
+      // Если галереи нет, создаем её, но только один раз
+      if (!instance.slides || instance.slides.length < 3) {
+        // Галереи нет или неполная, создаем полную галерею
+        var slides = [
+          { src: '#modalAuth', type: 'inline' },
+          { src: '#modalRegister', type: 'inline' },
+          { src: '#modalPasswordRestore', type: 'inline' }
+        ];
+        
+        // Закрываем текущий экземпляр
+        Fancybox.close();
+        
+        // Создаем новый с галереей
+        setTimeout(function() {
+          Fancybox.show(slides, {
+            startIndex: targetIndex,
+            autoFocus: false,
+            trapFocus: true
+          });
+          isProcessing = false;
+        }, 200);
+      } else {
+        // Галерея есть, но jumpTo не работает - это ошибка
+        isProcessing = false;
+      }
+    } catch(e) {
+      // Если произошла ошибка, не создаем новый экземпляр
+      console.error('Ошибка переключения модальных окон:', e);
+      isProcessing = false;
+    }
+  }
+  
+  // Добавляем обработчик на все ссылки внутри модальных окон (только один раз)
+  document.addEventListener('click', handleModalSwitch, true);
+})();
+</script>
+</body>
+</html>

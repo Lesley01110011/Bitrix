@@ -1,0 +1,452 @@
+<script>
+// Поиск в header - выполняется с максимальным приоритетом
+(function() {
+  'use strict';
+  
+  console.log('=== ПОИСК: Загрузка скрипта ===');
+  
+  var data = [
+    {t:'Готовые интернет-магазины на Bitrix',u:'./catalog.html',c:'Каталог'},
+    {t:'Разработка корпоративных сайтов',u:'./services.html',c:'Услуги'},
+    {t:'Новые шаблоны для интернет-магазинов',u:'./catalog.html',c:'Новинки'},
+    {t:'Скидки на услуги разработки',u:'./catalog.html',c:'Акции'},
+    {t:'Интеграция Bitrix24 с внешними системами',u:'./services.html',c:'Битрикс'},
+    {t:'Отзывы клиентов о наших услугах',u:'./reviews.html',c:'Отзывы'},
+    {t:'Портфолио выполненных проектов',u:'./about-service.html',c:'Портфолио'},
+    {t:'Часто задаваемые вопросы',u:'./faq.html',c:'Вопрос-ответ'}
+  ];
+  
+  function search(query) {
+    if (!query || !query.trim()) return [];
+    var q = query.trim().toLowerCase();
+    return data.filter(function(i) {
+      return i.t.toLowerCase().indexOf(q) !== -1 || i.c.toLowerCase().indexOf(q) !== -1;
+    });
+  }
+  
+  window.doSearch = function(type) {
+    console.log('doSearch вызван, тип:', type);
+    var id = type === 'desktop' ? 'search-desktop' : 'search-mobile';
+    var input = document.getElementById(id);
+    if (!input) {
+      console.error('Поле не найдено:', id);
+      return false;
+    }
+    var q = input.value.trim();
+    console.log('Запрос:', q);
+    if (!q) {
+      return false;
+    }
+    var r = search(q);
+    console.log('Найдено результатов:', r.length);
+    if (r.length > 0) {
+      var url = r[0].u + '?q=' + encodeURIComponent(q);
+      console.log('Переход на:', url);
+      window.location.href = url;
+    } else {
+      // Скрываем выпадающий список, если ничего не найдено
+      var container = document.getElementById('search-results-' + type);
+      if (container) {
+        container.classList.remove('active');
+        container.innerHTML = '';
+      }
+    }
+    return false;
+  };
+  
+  window.showAutocomplete = function(type) {
+    var id = type === 'desktop' ? 'search-desktop' : 'search-mobile';
+    var input = document.getElementById(id);
+    var container = document.getElementById('search-results-' + type);
+    if (!input || !container) return;
+    var q = input.value.trim();
+    if (q.length < 2) {
+      container.classList.remove('active');
+      container.innerHTML = '';
+      return;
+    }
+    var r = search(q);
+    if (r.length === 0) {
+      // Скрываем выпадающий список, если ничего не найдено
+      container.classList.remove('active');
+      container.innerHTML = '';
+      return;
+    }
+    var h = r.map(function(item) {
+      return '<a href="' + item.u + '?q=' + encodeURIComponent(q) + '" class="search__results-item">' +
+             '<div class="search__results-item-title">' + item.t + '</div>' +
+             '<div class="search__results-item-category">' + item.c + '</div></a>';
+    }).join('');
+    container.innerHTML = h;
+    container.classList.add('active');
+  };
+  
+  function init() {
+    console.log('=== ПОИСК: Инициализация ===');
+    
+    var df = document.querySelector('.header__search.mob-hidden form');
+    var di = document.getElementById('search-desktop');
+    var db = df ? df.querySelector('button[type="submit"]') : null;
+    
+    var mf = document.querySelector('.header__search.only-mobile form');
+    var mi = document.getElementById('search-mobile');
+    var mb = mf ? mf.querySelector('button[type="submit"]') : null;
+    
+    console.log('Desktop form:', df, 'input:', di, 'button:', db);
+    console.log('Mobile form:', mf, 'input:', mi, 'button:', mb);
+    
+    if (df && di) {
+      // Используем capture phase для максимального приоритета
+      df.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log('Desktop FORM SUBMIT');
+        return doSearch('desktop');
+      }, true);
+      
+      if (db) {
+        db.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Desktop BUTTON CLICK');
+          return doSearch('desktop');
+        }, true);
+      }
+      
+      di.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Desktop ENTER');
+          return doSearch('desktop');
+        }
+      }, true);
+      
+      di.addEventListener('input', function() {
+        console.log('Desktop INPUT');
+        showAutocomplete('desktop');
+      });
+    }
+    
+    if (mf && mi) {
+      mf.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log('Mobile FORM SUBMIT');
+        doSearch('mobile');
+        var btn = document.querySelector("[data-search-button-mobile]");
+        var field = document.querySelector("[data-search-field-mobile]");
+        if (btn && field) {
+          field.classList.remove("active");
+          btn.classList.remove("active");
+          setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+        }
+        return false;
+      }, true);
+      
+      if (mb) {
+        mb.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Mobile BUTTON CLICK');
+          doSearch('mobile');
+          var btn = document.querySelector("[data-search-button-mobile]");
+          var field = document.querySelector("[data-search-field-mobile]");
+          if (btn && field) {
+            field.classList.remove("active");
+            btn.classList.remove("active");
+            setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+          }
+          return false;
+        }, true);
+      }
+      
+      mi.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          console.log('Mobile ENTER');
+          doSearch('mobile');
+          var btn = document.querySelector("[data-search-button-mobile]");
+          var field = document.querySelector("[data-search-field-mobile]");
+          if (btn && field) {
+            field.classList.remove("active");
+            btn.classList.remove("active");
+            setTimeout(function() { document.body.classList.remove("overlay"); }, 100);
+          }
+          return false;
+        }
+      }, true);
+      
+      mi.addEventListener('input', function() {
+        console.log('Mobile INPUT');
+        showAutocomplete('mobile');
+      });
+    }
+    
+    console.log('=== ПОИСК: Инициализация завершена ===');
+  }
+  
+  // Запуск с максимальным приоритетом
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, true);
+  } else {
+    init();
+  }
+  
+  // Дополнительные попытки инициализации
+  setTimeout(init, 50);
+  setTimeout(init, 100);
+  setTimeout(init, 300);
+  setTimeout(init, 500);
+  setTimeout(init, 1000);
+  
+  console.log('=== ПОИСК: Скрипт загружен ===');
+})();
+</script>
+<header class="header">
+  <div class="container">
+    <div class="header__block header__top">
+      <a class="logo header__logo" href="/www/fastonline_static-main/docs/index.html">
+        <img src="./assets/images/logo-fast-online.svg" alt="FASTonline">
+      </a>
+      <div class="search header__search mob-hidden">
+        <form action="#" role="search" aria-label="Поиск по сайту">
+          <div class="search__wrapper">
+            <input 
+              type="search" 
+              id="search-desktop" 
+              name="search" 
+              placeholder="Поиск по сайту..." 
+              aria-label="Поле поиска" 
+              autocomplete="off"
+            >
+            <button class="search__button" type="submit" aria-label="Найти">
+              <svg class="search__button-icon" aria-hidden="true">
+                <use xlink:href="./assets/sprite.svg#icon-search"></use>
+              </svg>
+            </button>
+            <div class="search__results" id="search-results-desktop" role="listbox" aria-label="Результаты поиска"></div>
+          </div>
+        </form>
+      </div>
+      <div class="header__callback">
+        <div class="header__callback-link">
+          <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+          <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+        </div>
+      </div>
+      <div class="header__toolbar">
+        <a class="header__toolbar-link" href="#" aria-label="Избранное">
+          <svg class="header__toolbar-icon" aria-hidden="true">
+            <use xlink:href="./assets/sprite.svg#icon-fav"></use>
+          </svg>
+        </a>
+        <div class="search header__search only-mobile">
+          <form action="#" role="search" aria-label="Поиск по сайту (мобильная версия)">
+            <label for="search-mobile" class="visually-hidden" data-search-field-mobile style="display: none !important;"></label>
+            <div class="search__wrapper">
+              <input 
+                type="search" 
+                id="search-mobile" 
+                name="search" 
+                placeholder="Поиск по сайту..." 
+                aria-label="Поле поиска" 
+                autocomplete="off"
+              >
+              <button class="search__button" type="submit" tabindex="0" aria-label="Найти" data-search-button-mobile>
+                <svg class="search__button-icon" aria-hidden="true">
+                  <use xlink:href="./assets/sprite.svg#icon-search"></use>
+                </svg>
+              </button>
+              <div class="search__results" id="search-results-mobile" role="listbox" aria-label="Результаты поиска"></div>
+            </div>
+          </form>
+        </div>
+        <a class="header__toolbar-link cart" href="#" aria-label="Корзина, товаров: 42">
+          <span class="cart__count" aria-hidden="true">42</span>
+          <span class="visually-hidden">42 товара в корзине</span>
+          <svg class="header__toolbar-icon" aria-hidden="true">
+            <use xlink:href="./assets/sprite.svg#icon-cart"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="header__account">
+        <a class="button--light header__account-link" href="#">
+          <span>Войти</span>
+          <svg class="header__account-icon">
+            <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+          </svg>
+        </a>
+      </div>
+      <button class="header__menu-btn" type="button" aria-label="Открыть меню" aria-expanded="false" data-toggle-menu>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    <!-- Desktop меню -->
+    <div class="header__block header__bottom header__nav-desktop" role="navigation" aria-label="Основная навигация">
+      <nav class="nav header__nav">
+        <ul class="nav__list">
+          <li>
+            <a class="nav__link nav__link--accent" href="./catalog.html">
+              <div class="nav__link-icon burger" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>Каталог</span>
+            </a>
+          </li>
+          <li>
+            <a class="nav__link" href="./services.html">Услуги</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./catalog.html">Новинки</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./catalog.html">Акции</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./services.html">Битрикс</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./reviews.html">Отзывы</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./howitwork.html">Как купить</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./about-service.html">Портфолио</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./faq.html">Вопрос-ответ</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./about-service.html">О проекте</a>
+          </li>
+          <li>
+            <a class="nav__link" href="./contacts.html">Контакты</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <!-- Мобильное меню -->
+    <div class="header__block header__bottom menu-mobile" data-mobile-menu role="navigation" aria-label="Основная навигация">
+      <nav class="nav header__nav menu-mobile__nav">
+        <ul class="nav__list menu-mobile__list" role="menubar">
+          <li role="none">
+            <a class="nav__link nav__link--accent menu-mobile__link" href="./catalog.html" role="menuitem">
+              <div class="nav__link-icon burger tab-hidden" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span>Каталог</span>
+            </a>
+            <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./services.html" role="menuitem">
+              <span>Услуги</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./catalog.html" role="menuitem">
+              <span>Новинки</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./catalog.html" role="menuitem">
+              <span>Акции</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./services.html" role="menuitem">
+              <span>Битрикс</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./reviews.html" role="menuitem">
+              <span>Отзывы</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./howitwork.html" role="menuitem">
+              <span>Как купить</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./about-service.html" role="menuitem">
+              <span>Портфолио</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./faq.html" role="menuitem">
+              <span>Вопрос-ответ</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./about-service.html" role="menuitem">
+              <span>О проекте</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+          <li role="none">
+            <a class="nav__link menu-mobile__link" href="./contacts.html" role="menuitem">
+              <span>Контакты</span>
+            </a>
+             <svg class="menu-mobile__link-icon" aria-hidden="true">
+              <use xlink:href="./assets/sprite.svg#icon-arrow-extra-min"></use>
+            </svg>
+          </li>
+        </ul>
+        <div class="menu-mobile__nav-bottom">
+          <div class="header__account header__account--mobile">
+            <a class="header__account-link" href="#">
+              <span>Войти</span>
+              <svg class="header__account-icon">
+                <use xlink:href="./assets/sprite.svg#icon-enter"></use>
+              </svg>
+            </a>
+          </div>
+          <div class="header__callback header__callback--mobile">
+            <div class="header__callback-link">
+              <a class="header__callback-text" href="tel:+78000000000">8 800 000 0000</a>
+              <a class="header__callback-text-underline" data-fancybox href="#modalCallback">Заказать звонок</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
